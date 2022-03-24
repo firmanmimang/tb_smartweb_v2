@@ -11,6 +11,14 @@
                     @method('delete')
                     <button class="btn btn-danger"><span data-feather="x-circle" style="margin-bottom: 1px;"></span> Delete</button>
                 </form>
+                <div class="my-3 d-flex">
+                    <div class="me-5">
+                        publish_status : {{$post->publish_status ? 'publish':'not publish'}}
+                    </div>
+                    <div>
+                        comment_status : {{$post->comment_status ? 'on':'off'}}
+                    </div>
+                </div>
                 <h1 class="mb-3">{{$post->title}}</h1>
                 <p>by {{$post->author->name}} in {{$post->category->name}}.</p>
                  @if ($post->image)

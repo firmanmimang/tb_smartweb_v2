@@ -15,6 +15,11 @@ class Post extends Model
 
     protected $with = ['category', 'author'];
 
+    protected $casts = [
+        'publish_status' => 'boolean',
+        'comment_status' => 'boolean',
+    ];
+
     /**
      * filter searching, category, author purposes on post index
      */
