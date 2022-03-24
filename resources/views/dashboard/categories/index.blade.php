@@ -22,11 +22,11 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$category->name}}</td>
                 <td>{{$category->slug}}</td>
-                <td>{{$category->description ?? 'no description'}}</td>
+                <td>{{$category->description ?? '-'}}</td>
                 <td>
                     {{-- <a href="/dashboard/categories/{{$category->slug}}" class="badge bg-info"><span data-feather="eye"></span></a> --}}
-                    <a href="/dashboard/categories/{{$category->slug}}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
-                    <form action="/dashboard/categories/{{$category->slug}}" method="POST" class="d-inline" onclick="return confirm('are you sure?')">
+                    <a href="{{route('dashboard.categories.edit', ['category' => $category->slug])}}" class="badge bg-warning"><span data-feather="edit"></span></a>
+                    <form action="{{route('dashboard.categories.destroy', ['category' => $category->slug])}}" method="POST" class="d-inline" onclick="return confirm('are you sure?')">
                       @csrf
                       @method('delete')
                       <button class="badge bg-danger border-0"><span data-feather="x-circle"></span></button>
@@ -37,5 +37,5 @@
           </tbody>
         </table>
     </div>
-    
+
 @endsection
