@@ -119,7 +119,9 @@ class DashboardPostController extends Controller
             'title' => 'required|max:255',
             'category_id' => 'required',
             'image' => 'image|file|max:1024',
-            'body' => 'required'
+            'body' => 'required',
+            'publish_status'=> 'required|in:true,false',
+            'comment_status'=> 'required|in:true,false',
         ];
 
         ($request->slug != $post->slug)?
@@ -129,20 +131,31 @@ class DashboardPostController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('image')){
-            if($request->oldImage){
-                Storage::delete($request->oldImage);
+        try {
+            if($request->file('image')){
+                if($request->oldImage){
+                    Storage::delete($request->oldImage);
+                }
+                $validatedData['image'] = $request->file('image')->store('post-images');
             }
-            $validatedData['image'] = $request->file('image')->store('post-images');
+    
+            $validatedData['user_id'] = auth()->user()->id;
+            $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
+            $validatedData['publish_status'] = $validatedData['publish_status'] == 'true' ? true : false;
+            $validatedData['comment_status'] = $validatedData['comment_status'] == 'true' ? true : false;
+            
+            DB::beginTransaction();
+            Post::where('id', $post->id)
+                ->update($validatedData);
+            DB::commit();
+    
+            return redirect()->route('dashboard.posts.index')->with('success', 'Post '. $post->title .' has been updated.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            //throw $th;
+
+            return redirect()->route('dashboard.posts.index')->with('error', 'Something went wrong on editing '. $post->title .' post.');
         }
-
-        $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
-
-        Post::where('id', $post->id)
-            ->update($validatedData);
-
-        return redirect('/dashboard/posts')->with('success', 'Post has been updated.');
     }
 
     /**
@@ -153,13 +166,28 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->image){
-            Storage::delete($post->image);
+        try {
+            if($post->image){
+                Storage::delete($post->image);
+            }
+
+            DB::beginTransaction();
+            Post::destroy($post->id);
+            DB::commit();
+
+            return redirect()->route('dashboard.posts.index')->with('success', 'Post '. $post->title .' has been deleted.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            //throw $th;
+
+            return redirect()->route('dashboard.posts.index')->with('error', 'Something went wrong on deleting '. $post->title .' post.');
         }
-        Post::destroy($post->id);
-        return redirect('/dashboard/posts')->with('success', 'Post has been deleted.');
     }
 
+    /**
+     * for generating slug on change event input title form post, access using fetch js
+     * @return json
+     */
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);

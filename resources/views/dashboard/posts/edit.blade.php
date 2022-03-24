@@ -8,6 +8,53 @@
     <form method="POST" action="/dashboard/posts/{{$post->slug}}" class="mb-3" enctype="multipart/form-data">
         @csrf
         @method('put')
+
+        <div class="mb-3">
+            <label class="form-label">Publish Status</label>
+            <div class="d-flex">
+                <div class="form-check me-5">
+                    <input class="form-check-input @error('publish_status') is-invalid @enderror" type="radio" name="publish_status" id="flexRadioDefault1" value="true" @if($post->publish_status) checked @endif>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Publish
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input @error('publish_status') is-invalid @enderror" type="radio" name="publish_status" id="flexRadioDefault2" value="false" @if(!$post->publish_status) checked @endif>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Not publish
+                    </label>
+                </div>
+            </div>
+            @error('publish_status')
+                <div class="text-danger" style="font-size: .875em">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Comment</label>
+            <div class="d-flex">
+                <div class="form-check me-5">
+                    <input class="form-check-input @error('comment_status') is-invalid @enderror" type="radio" name="comment_status" id="flexRadioDefault3" value="true" @if($post->comment_status) checked @endif>
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        On
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input @error('comment_status') is-invalid @enderror" type="radio" name="comment_status" id="flexRadioDefault4" value="false" @if(!$post->comment_status) checked @endif>
+                    <label class="form-check-label" for="flexRadioDefault4">
+                        Off
+                    </label>
+                </div>
+            </div>
+            @error('comment_status')
+                <div class="text-danger" style="font-size: .875em">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="title..." value="{{old('title', $post->title)}}">
