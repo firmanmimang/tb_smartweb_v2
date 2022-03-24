@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backoffice;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -18,11 +18,6 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        //MANUAL AUTHORIZE
-        // if(!auth()->check() || auth()->user()->username !== 'mimang'){
-        //     abort(403);
-        // }
-
         $this->authorize('admin');
 
         return view('dashboard.categories.index', [
@@ -65,8 +60,8 @@ class AdminCategoryController extends Controller
 
             return redirect()->route('dashboard.categories.index')->with('success', 'Category '. $category->name .' created succesfully.');
         } catch (\Throwable $th) {
-            //throw $th;
             DB::rollBack();
+            //throw $th;
 
             return redirect()->route('dashboard.categories.index')->with('error', 'Something went wrong on creating category.');
         }
