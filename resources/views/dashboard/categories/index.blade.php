@@ -37,6 +37,5 @@
           </tbody>
         </table>
     </div>
-
-<script src="/js/slideUp.js"></script>
+    
 @endsection
