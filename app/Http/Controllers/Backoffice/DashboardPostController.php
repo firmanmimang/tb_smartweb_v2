@@ -118,7 +118,7 @@ class DashboardPostController extends Controller
         $rules = [
             'title' => 'required|max:255',
             'category_id' => 'required',
-            'image' => 'image|file|max:1024',
+            'image' => 'image|mimes:jpeg,jpg,png',
             'body' => 'required',
             'publish_status'=> 'required|in:true,false',
             'comment_status'=> 'required|in:true,false',
@@ -152,7 +152,7 @@ class DashboardPostController extends Controller
             return redirect()->route('dashboard.posts.index')->with('success', 'Post '. $post->title .' has been updated.');
         } catch (\Throwable $th) {
             DB::rollBack();
-            //throw $th;
+            throw $th;
 
             return redirect()->route('dashboard.posts.index')->with('error', 'Something went wrong on editing '. $post->title .' post.');
         }

@@ -3,6 +3,7 @@
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,12 @@ Route::get('/categories', function(){
 require __DIR__.'/routes/backoffice.php';
 // list routing auth
 require __DIR__.'/routes/auth.php';
+
+// Route::get('info', function(){
+//     return view('info');
+// });
+
+// Route::get('log', function(){
+//     Log::channel('log')->info('This is testing for codecheef.org!');
+// });
 

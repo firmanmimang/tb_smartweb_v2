@@ -4,9 +4,9 @@
     <div class="container">
         <div class="my-3">
             <div class="col-lg-8">
-                <a href="/dashboard/posts" class="btn btn-success"><span data-feather="arrow-left" style="margin-bottom: 1px;"></span> Back to all my posts</a>
-                <a href="/dashboard/posts/{{$post->slug}}/edit" class="btn btn-warning"><span data-feather="edit" style="margin-bottom: 1px;"></span> Edit</a>
-                <form action="/dashboard/posts/{{$post->slug}}" method="POST" class="d-inline" onclick="return confirm('are you sure?')">
+                <a href="{{route('dashboard.posts.index')}}" class="btn btn-success"><span data-feather="arrow-left" style="margin-bottom: 1px;"></span> Back to all my posts</a>
+                <a href="{{route('dashboard.posts.edit', $post)}}" class="btn btn-warning"><span data-feather="edit" style="margin-bottom: 1px;"></span> Edit</a>
+                <form action="{{route('dashboard.posts.destroy', $post)}}" method="POST" class="d-inline" onclick="return confirm('are you sure?')">
                     @csrf
                     @method('delete')
                     <button class="btn btn-danger"><span data-feather="x-circle" style="margin-bottom: 1px;"></span> Delete</button>

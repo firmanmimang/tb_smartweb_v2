@@ -5,7 +5,7 @@
     <h1 class="h2">Edit New Post</h1>
 </div>
 <div class="col-lg-8">
-    <form method="POST" action="/dashboard/posts/{{$post->slug}}" class="mb-3" enctype="multipart/form-data">
+    <form method="POST" action="{{route('dashboard.posts.update', $post)}}" class="mb-3" enctype="multipart/form-data">
         @csrf
         @method('put')
 

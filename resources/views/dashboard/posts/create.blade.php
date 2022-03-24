@@ -5,7 +5,7 @@
         <h1 class="h2">Create New Post</h1>
     </div>
     <div class="col-lg-8 mb-5">
-        <form method="POST" action="/dashboard/posts" class="mb-3" enctype="multipart/form-data">
+        <form method="POST" action="{{route('dashboard.posts.store')}}" class="mb-3" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Publish Status</label>
