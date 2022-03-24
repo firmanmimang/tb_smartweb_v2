@@ -1,12 +1,8 @@
 <?php
 
-use App\Http\Controllers\Backoffice\AdminCategoryController;
-use App\Http\Controllers\Backoffice\DashboardPostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,40 +43,8 @@ Route::get('/categories', function(){
     ]);
 });
 
-// sudah ditangani sama /blog
-// Route::get('/categories/{category:slug}', function(Category $category){
-//     return view('posts',[
-//         'title' => "Post by Category : $category->name",
-//         'active' => 'categories',
-//         'posts' => $category->posts->load('category', 'author')
-//     ]);
-// });
-// Route::get('/author/{author:username}', function(User $author){
-//     return view('posts',[
-//         'title' => "Post by Author : $author->name",
-//         'active' => 'author',
-//         'posts' => $author->posts->load('category', 'author')
-//     ]);
-// });
-
-// auth
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
-//register
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
-
-Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['auth']], function() {
-
-    Route::get('/', function(){
-        return view('dashboard.index');
-    })->name('index');
-
-    Route::get('/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->name('checkSlug');
-
-    Route::resource('/posts', DashboardPostController::class);
-    
-    Route::resource('/categories', AdminCategoryController::class)->except('show')->middleware('admin');
-});
+// list routing backoffice
+require __DIR__.'/routes/backoffice.php';
+// list routing auth
+require __DIR__.'/routes/auth.php';
 
