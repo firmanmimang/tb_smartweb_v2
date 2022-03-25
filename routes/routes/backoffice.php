@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Backoffice\AdminCategoryController;
 use App\Http\Controllers\Backoffice\DashboardPostController;
+use App\Http\Controllers\Backoffice\ProfileController;
+use App\Http\Controllers\Backoffice\ProfilePasswordController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -20,7 +22,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     })->name('index');
 
     /**
-     * routing for generate slug on posts crud using fetch js
+     * routing for generate slug on dashboard posts crud using fetchapi method js
      * url : dashboard/posts/checkSlug
      * name : dashboard.checkSlug
      * middleware : auth
@@ -42,4 +44,22 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
      * middleware : ['auth', 'admin']
      */
     Route::resource('/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+
+    /**
+     * routing manage profile purpose
+     * url : dashboard/profile/*
+     * name : dashboard.profile.*
+     * middleware : auth
+     */
+    Route::get('/profile/{user:username}', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile/{user:username}', [ProfileController::class, 'update'])->name('profile.update');
+
+    /**
+     * routing change password
+     * url : dashboard/profile/password/*
+     * name : dashboard.profile.password.*
+     * middleware : auth
+     */
+    Route::get('/profile/{user:username}/password', [ProfilePasswordController::class, 'index'])->name('profile.password.index');
+    Route::put('/profile/{user:username}/password', [ProfilePasswordController::class, 'update'])->name('profile.password.update');
 });
