@@ -36,7 +36,7 @@ class ProfilePasswordController extends Controller
             DB::rollBack();
             //throw $th;
 
-            return back()->with('error', 'Something went wrong on updating your password.');
+            return redirect()->route('dashboard.profile.index', $user)->with('error', 'Something went wrong on updating your password.');
         }
     }
 }
