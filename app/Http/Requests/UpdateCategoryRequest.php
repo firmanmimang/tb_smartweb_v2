@@ -24,7 +24,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules()
     {
-
+        // dd(Request::instance()->name);
         return [
             'name' => ['required', 'unique:categories,name,'.Request::instance()->name, 'max:191'],
             'description' => ['nullable', 'string'],
