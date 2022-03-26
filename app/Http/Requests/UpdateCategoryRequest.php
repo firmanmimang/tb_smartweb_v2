@@ -26,7 +26,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         // dd(Request::instance()->name);
         return [
-            'name' => ['required', 'unique:categories,name,'.Request::instance()->name, 'max:191'],
+            'name' => ['required', 'unique:categories,name,'.Request::instance()->id, 'max:191'],
             'description' => ['nullable', 'string'],
         ];
     }

@@ -46,6 +46,14 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     Route::resource('/categories', AdminCategoryController::class)->except('show')->middleware('admin');
 
     /**
+     * routing for users crud
+     * url : dashboard/profile/password/*
+     * name : dashboard.profile.password.*
+     * middleware : auth
+     */
+    Route::resource('/categories', AdminController::class)->except('show')->middleware('admin');
+
+    /**
      * routing manage profile purpose
      * url : dashboard/profile/*
      * name : dashboard.profile.*
@@ -62,4 +70,5 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
      */
     Route::get('/profile/{user:username}/password', [ProfilePasswordController::class, 'index'])->name('profile.password.index');
     Route::put('/profile/{user:username}/password', [ProfilePasswordController::class, 'update'])->name('profile.password.update');
+
 });

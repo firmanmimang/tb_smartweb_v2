@@ -8,6 +8,11 @@
     <form method="POST" action="{{route('dashboard.categories.update', $category)}}" class="mb-3">
         @csrf
         @method('PUT')
+
+        {{-- for excepting unique validation --}}
+        <input type="hidden" name="id" value="{{$category->id}}">
+        {{-- ------------------------------------------------- --}}
+        
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="name..." value="{{old('name', $category->name)}}">
