@@ -16,38 +16,12 @@ use Illuminate\Support\Facades\Log;
 |
 */
 
-Route::get('/', function () {
-    return view('home',[
-        'title' => 'Home',
-        'active' => 'home'
-    ]);
-});
-
-Route::get('/about', function () {
-    return view('about',[
-        'title' => 'About',
-        'active' => 'about',
-        'name' => 'Firman Hidayat',
-        'email' => 'fhidayat131@gmail.com',
-        'image' => 'firman.jpg'
-    ]);
-});
-
-Route::get('/blog', [PostController::class, 'index']);
-Route::get('/posts/{post:slug}', [PostController::class, 'show']);
-
-Route::get('/categories', function(){
-    return view('categories',[
-        'title' => 'Post Categories',
-        'active' => 'categories',
-        'categories' => Category::all()
-    ]);
-});
-
+// list routing frontend
+require __DIR__.'/web-routes/frontend.php';
 // list routing backoffice
-require __DIR__.'/routes/backoffice.php';
+require __DIR__.'/web-routes/backoffice.php';
 // list routing auth
-require __DIR__.'/routes/auth.php';
+require __DIR__.'/web-routes/auth.php';
 
 // Route::get('info', function(){
 //     return view('info');

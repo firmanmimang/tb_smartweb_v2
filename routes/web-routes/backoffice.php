@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backoffice\AdminCategoryController;
+use App\Http\Controllers\Backoffice\AdminUserController;
 use App\Http\Controllers\Backoffice\DashboardPostController;
 use App\Http\Controllers\Backoffice\ProfileController;
 use App\Http\Controllers\Backoffice\ProfilePasswordController;
@@ -20,6 +21,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     Route::get('/', function(){
         return view('dashboard.index');
     })->name('index');
+    // -----------------------------------------
 
     /**
      * routing for generate slug on dashboard posts crud using fetchapi method js
@@ -28,6 +30,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
      * middleware : auth
      */
     Route::get('/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->name('checkSlug');
+    // --------------------------------------------
 
     /**
      * routing posts crud
@@ -36,14 +39,30 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
      * middleware : auth
      */
     Route::resource('/posts', DashboardPostController::class);
-    
-    /**
-     * routing categories crud
-     * url : dashboard/categories/*
-     * name : dashboard.categories.*
-     * middleware : ['auth', 'admin']
-     */
-    Route::resource('/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+    // -----------------------------------------------
+
+    // group routing has middleware auth and admin
+    Route::group(['middleware' => ['admin']], function() 
+    {
+        /**
+         * routing categories crud
+         * url : dashboard/categories/*
+         * name : dashboard.categories.*
+         * middleware : ['auth', 'admin']
+         */
+        Route::resource('/categories', AdminCategoryController::class)->except('show');
+        // ----------------------------------------------------------
+
+        /**
+         * routing categories users
+         * url : dashboard/users/*
+         * name : dashboard.users.*
+         * middleware : ['auth', 'admin']
+         */
+        Route::resource('/users', AdminUserController::class)->except('show');
+        // ----------------------------------------------------------
+    });
+    // -------------------------------------------------
 
     /**
      * routing for users crud
@@ -51,7 +70,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
      * name : dashboard.profile.password.*
      * middleware : auth
      */
-    Route::resource('/categories', AdminController::class)->except('show')->middleware('admin');
+    Route::resource('/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+    // --------------------------------------------------
 
     /**
      * routing manage profile purpose
@@ -61,6 +81,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
      */
     Route::get('/profile/{user:username}', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile/{user:username}', [ProfileController::class, 'update'])->name('profile.update');
+    // ---------------------------------------------------
 
     /**
      * routing change password
@@ -70,5 +91,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
      */
     Route::get('/profile/{user:username}/password', [ProfilePasswordController::class, 'index'])->name('profile.password.index');
     Route::put('/profile/{user:username}/password', [ProfilePasswordController::class, 'update'])->name('profile.password.update');
+    // -------------------------------------------------------
+
 
 });
