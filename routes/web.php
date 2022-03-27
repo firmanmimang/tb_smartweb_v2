@@ -1,10 +1,5 @@
 <?php
 
-use App\Models\Category;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use Illuminate\Support\Facades\Log;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

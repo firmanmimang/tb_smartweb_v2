@@ -7,10 +7,16 @@
             Dashboard
           </a>
         </li>
+      </ul>
+
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Author</span>
+      </h6>
+      <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link {{Request::is('dashboard/posts*')? 'active': null}}" href="/dashboard/posts">
             <span data-feather="file-text"></span>
-            My Posts
+            My News
           </a>
         </li>
       </ul>
@@ -24,6 +30,12 @@
             <a href="/dashboard/categories" class="nav-link {{Request::is('dashboard/categories*')? 'active': null}}">
               <span data-feather="grid"></span>
               Post Categories
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('dashboard.users.index')}}" class="nav-link {{Request::is('dashboard/users*')? 'active': null}}">
+              <span data-feather="grid"></span>
+              Manage Users
             </a>
           </li>
         </ul>

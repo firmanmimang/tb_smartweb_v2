@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class AdminUserController extends Controller
 {
@@ -14,7 +19,9 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        return 'hai';
+        return view('dashboard.users.index', [
+            'users' => User::all(),
+        ]);
     }
 
     /**
@@ -24,7 +31,9 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.users.create', [
+            'roles' => Role::all(),
+        ]);
     }
 
     /**
@@ -35,18 +44,30 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'username' => ['required', 'min:3', 'max:255', 'unique:users'],
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required|min:5|max:255|confirmed',
+            'role' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        try {
+            $validatedData['password'] =Hash::make($validatedData['password']);
+            
+            DB::beginTransaction();
+            $user = User::create($validatedData);
+            $user->assignRole($validatedData['role']);
+            DB::commit();
+    
+            return redirect()->route('dashboard.users.index')->with('success', 'User created successfully.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            //throw $th;
+
+            return redirect()->route('dashboard.users.index')->with('error', 'Something went wrong on creating user.');
+        }
+
     }
 
     /**
@@ -55,9 +76,12 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('dashboard.users.edit', [
+            'roles' => Role::all(),
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -67,9 +91,30 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'username' => ['required', 'min:3', 'max:255', 'unique:users,username,'.$user->id],
+            'email' => 'required|email:dns|unique:users,email,'.$user->id,
+            'role' => 'required',
+        ]);
+
+        try {
+            
+            DB::beginTransaction();
+            $user->update($validatedData);
+            $user->syncRoles($validatedData['role']);
+            DB::commit();
+    
+            return redirect()->route('dashboard.users.index')->with('success', 'User updated successfully.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            //throw $th;
+
+            return redirect()->route('dashboard.users.index')->with('error', 'Something went wrong on updating user.');
+        }
+
     }
 
     /**
@@ -78,8 +123,24 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            
+            if($user->image){
+                Storage::delete($user->image);
+            }
+
+            DB::beginTransaction();
+            $user->delete();
+            DB::commit();
+
+            return redirect()->route('dashboard.users.index')->with('success', 'User deleted successfully.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            //throw $th;
+
+            return redirect()->route('dashboard.users.index')->with('error', 'Something went wrong on deleting user.');
+        }
     }
 }
