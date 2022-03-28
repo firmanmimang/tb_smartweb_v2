@@ -6,12 +6,14 @@ use Illuminate\Support\Facades\Route;
 
 
 // homepage
-Route::get('/', function () {
-    return view('home',[
-        'title' => 'Home',
-        'active' => 'home'
-    ]);
-});
+// Route::get('/', function () {
+//     return view('home',[
+//         'title' => 'Home',
+//         'active' => 'home'
+//     ]);
+// });
+
+// Route::get('/')
 
 // about us
 Route::get('/about', function () {
