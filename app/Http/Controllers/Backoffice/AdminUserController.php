@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
@@ -19,6 +20,8 @@ class AdminUserController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies("users-access"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         return view('dashboard.users.index', [
             'users' => User::all(),
         ]);
@@ -31,6 +34,8 @@ class AdminUserController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies("users-create"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         return view('dashboard.users.create', [
             'roles' => Role::all(),
         ]);
@@ -44,6 +49,8 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(Gate::denies("users-store"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],
@@ -78,6 +85,8 @@ class AdminUserController extends Controller
      */
     public function edit(User $user)
     {
+        abort_if(Gate::denies("users-edit"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         return view('dashboard.users.edit', [
             'roles' => Role::all(),
             'user' => $user,
@@ -93,6 +102,8 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        abort_if(Gate::denies("users-update"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'username' => ['required', 'min:3', 'max:255', 'unique:users,username,'.$user->id],
@@ -125,8 +136,10 @@ class AdminUserController extends Controller
      */
     public function destroy(User $user)
     {
+        abort_if(Gate::denies("users-delete"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         try {
-            
+
             if($user->image){
                 Storage::delete($user->image);
             }

@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,6 +21,8 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies("posts-access"), 403, 'THIS ACTION IS UNAUTHORIZE');
+        
         return view('dashboard.posts.index', [
             'posts' => Post::where('user_id', auth()->user()->id)->get()
         ]);
@@ -32,6 +35,8 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies("posts-create"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         return view('dashboard.posts.create', [
             'categories' => Category::all()
         ]);
@@ -45,6 +50,8 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(Gate::denies("posts-store"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
@@ -86,6 +93,8 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
+        abort_if(Gate::denies("posts-show"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         return view('dashboard.posts.show', [
             'post' => $post
         ]);
@@ -99,6 +108,8 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
+        abort_if(Gate::denies("posts-edit"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         return view('dashboard.posts.edit', [
             'post' => $post,
             'categories' => Category::all()
@@ -115,6 +126,8 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        abort_if(Gate::denies("posts-update"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         $rules = [
             'title' => 'required|max:255',
             'category_id' => 'required',
@@ -145,8 +158,7 @@ class DashboardPostController extends Controller
             $validatedData['comment_status'] = $validatedData['comment_status'] == 'true' ? true : false;
             
             DB::beginTransaction();
-            Post::where('id', $post->id)
-                ->update($validatedData);
+            Post::where('id', $post->id)->update($validatedData);
             DB::commit();
     
             return redirect()->route('dashboard.posts.index')->with('success', 'Post '. $post->title .' has been updated.');
@@ -166,6 +178,8 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        abort_if(Gate::denies("posts-delete"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         try {
             if($post->image){
                 Storage::delete($post->image);

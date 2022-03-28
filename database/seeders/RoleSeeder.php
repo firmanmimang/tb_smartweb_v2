@@ -14,8 +14,42 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'author']);
+        Role::create(['name' => 'admin'])->givePermissionTo([
+            // posts (news) crud
+            "posts-access",
+            "posts-create",
+            "posts-store",
+            "posts-edit",
+            "posts-show",
+            "posts-update",
+            "posts-delete",
+
+            // categories crud
+            "categories-access",
+            "categories-create",
+            "categories-store",
+            "categories-edit",
+            "categories-update",
+            "categories-delete",
+
+            // users crud
+            "users-access",
+            "users-create",
+            "users-store",
+            "users-edit",
+            "users-update",
+            "users-delete",
+        ]);
+        Role::create(['name' => 'author'])->givePermissionTo([
+            // posts (news) crud
+            "posts-access",
+            "posts-create",
+            "posts-store",
+            "posts-edit",
+            "posts-show",
+            "posts-update",
+            "posts-delete",
+        ]);
         Role::create(['name' => 'subscriber']);
     }
 }

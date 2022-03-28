@@ -7,6 +7,7 @@ use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class AdminCategoryController extends Controller
@@ -18,7 +19,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $this->authorize('admin');
+        abort_if(Gate::denies("categories-access"), 403, 'THIS ACTION IS UNAUTHORIZE');
 
         return view('dashboard.categories.index', [
             'categories' => Category::all()
@@ -32,7 +33,7 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        $this->authorize('admin');
+        abort_if(Gate::denies("categories-create"), 403, 'THIS ACTION IS UNAUTHORIZE');
 
         return view('dashboard.categories.create');
     }
@@ -45,6 +46,8 @@ class AdminCategoryController extends Controller
      */
     public function store(CreateCategoryRequest $request)
     {
+        abort_if(Gate::denies("categories-store"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         try {
             DB::beginTransaction();
 
@@ -75,6 +78,8 @@ class AdminCategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        abort_if(Gate::denies("categories-edit"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         return view('dashboard.categories.edit', compact('category'));
     }
 
@@ -87,6 +92,8 @@ class AdminCategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
+        abort_if(Gate::denies("categories-update"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         try {
             DB::beginTransaction();
 
@@ -119,6 +126,8 @@ class AdminCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        abort_if(Gate::denies("categories-delete"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
         try {
             DB::beginTransaction();
 
