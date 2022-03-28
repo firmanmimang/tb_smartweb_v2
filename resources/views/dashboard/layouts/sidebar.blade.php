@@ -55,24 +55,29 @@
                     </li>
                 @endcan
 
+                <li class="nav-item">
+                    <a href="{{ route('dashboard.admin.posts.index') }}"
+                        class="nav-link {{ Request::is('dashboard/admin/posts*') ? 'active' : null }}">
+                        <span data-feather="grid"></span>
+                        All Posts
+                    </a>
+                </li>
+
             </ul>
         @endif
 
-        @can('edit-profile')
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Profile</span>
-            </h6>
-            <ul class="nav flex-column">
-                @can('edit-profile')
-                    <li class="nav-item">
-                        <a href="{{ route('dashboard.profile.index', ['user' => auth()->user()->username]) }}"
-                            class="nav-link {{ Request::is('dashboard/profile*') ? 'active' : null }}">
-                            <span data-feather="grid"></span>
-                            Manage Profile
-                        </a>
-                    </li>
-                @endcan
-            </ul>
-        @endcan
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Profile</span>
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a href="{{ route('dashboard.profile.index', ['user' => auth()->user()->username]) }}"
+                    class="nav-link {{ Request::is('dashboard/profile*') ? 'active' : null }}">
+                    <span data-feather="grid"></span>
+                    Manage Profile
+                </a>
+            </li>
+        </ul>
+
     </div>
 </nav>

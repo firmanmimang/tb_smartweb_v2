@@ -39,7 +39,11 @@ class RoleSeeder extends Seeder
             "users-edit",
             "users-update",
             "users-delete",
+
+            // change highlight news
+            "change-highlight-news"
         ]);
+
         Role::create(['name' => 'author'])->givePermissionTo([
             // posts (news) crud
             "posts-access",
@@ -50,6 +54,7 @@ class RoleSeeder extends Seeder
             "posts-update",
             "posts-delete",
         ]);
+        
         Role::create(['name' => 'subscriber']);
     }
 }

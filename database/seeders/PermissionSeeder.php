@@ -46,6 +46,9 @@ class PermissionSeeder extends Seeder
 
             // can comment or not
             "comment",
+
+            // change highlight news
+            "change-highlight-news"
         ];
 
         for ($i = 0; $i < count($permissions); $i++) {

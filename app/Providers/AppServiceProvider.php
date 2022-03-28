@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        View::share('categoriesGlobal', Category::get(['name', 'slug']));
 
         // permisson posts (news) crud
         Gate::define('posts-access', function(User $user){
@@ -51,6 +55,11 @@ class AppServiceProvider extends ServiceProvider
             return $user->hasPermissionTo('posts-delete');
         });
         // ---------------------------------------------------------------
+        // permission change highlight news
+        Gate::define('change-highlight-news', function(User $user){
+            return $user->hasPermissionTo('change-highlight-news');
+        });
+        // ----------------------------------------------------------------
 
         // permisson users crud
         Gate::define('categories-access', function(User $user){

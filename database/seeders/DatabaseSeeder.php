@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\Post;
+use App\Models\News;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'password'=> bcrypt('12345'),
         ])
         ->assignRole('admin')
-        ->givePermissionTo(['comment', 'edit-profile', 'change-password']);
+        ->givePermissionTo(['comment', 'edit-profile', 'change-password', '']);
 
         
         User::create([
@@ -66,6 +66,6 @@ class DatabaseSeeder extends Seeder
             'slug' => 'personal'
         ]);
 
-        Post::factory(20)->create();
+        News::factory(20)->create();
     }
 }

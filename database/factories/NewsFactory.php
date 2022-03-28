@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
+use App\Models\News;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PostFactory extends Factory
+class NewsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Post::class;
+    protected $model = News::class;
 
     /**
      * Define the model's default state.
@@ -31,6 +31,7 @@ class PostFactory extends Factory
             'category_id' => mt_rand(1,2),
             'user_id' => mt_rand(1,2),
             'publish_status' => true,
+            'is_highlight' => false,
             'comment_status' => true,
             'published_at' => Carbon::now()->format('Y-m-d'),
         ];

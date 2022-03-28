@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Post extends Model
+class News extends Model
 {
     use HasFactory, Sluggable;
+
+    protected $table = 'news';
 
     // protected $fillable = ['title', 'excerpt', 'body'];
     protected $guarded = ['id'];
@@ -18,6 +20,7 @@ class Post extends Model
     protected $casts = [
         'publish_status' => 'boolean',
         'comment_status' => 'boolean',
+        'is_highlight' => 'boolean',
     ];
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminNewsController;
 use App\Http\Controllers\Backoffice\AdminCategoryController;
 use App\Http\Controllers\Backoffice\AdminUserController;
 use App\Http\Controllers\Backoffice\DashboardPostController;
@@ -39,6 +40,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
      * middleware : auth
      */
     Route::resource('/posts', DashboardPostController::class);
+    // ---------------------------------------------
+
+    // routing for change is highlight news, name : dashboard.posts.highlight
+    Route::put('/posts/highlight/{news}', [DashboardPostController::class, 'changeIsHighlight'])->name('posts.highlight');
     // -----------------------------------------------
 
     // group routing has middleware auth and admin
@@ -60,7 +65,17 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
          * middleware : ['auth', 'admin']
          */
         Route::resource('/users', AdminUserController::class)->except('show');
-        // ----------------------------------------------------------
+        // -----------------------------------------------------------
+
+        /**
+         * routing admin posts menu
+         * url : dashboard/admin/posts*
+         * name : dashboard.admin.posts.*
+         * middleware : ['auth', 'admin']
+         */
+        Route::get('/admin/posts', [AdminNewsController::class, 'index'])->name('admin.posts.index');
+        // change highlight
+        // Route::put('/admin/posts/highlight/{news}', [AdminNewsController::class, 'changeIsHighlight'])->name('admin.posts.highlight');
     });
     // -------------------------------------------------
 

@@ -8,8 +8,8 @@
         <div class="col-md-5">
             @if ($user->image)
                 <div class="w-100 overflow-hidden rounded" style="max-height: 500px">
-                    <img src="{{ asset('storage/' . $user->image) }}" alt="profile photo {{ $user->name }}" class="img-fluid img-preview"
-                        style="object-fit: cover">
+                    <img src="{{ asset('storage/' . $user->image) }}" alt="profile photo {{ $user->name }}"
+                        class="img-fluid img-preview" style="object-fit: cover">
                 </div>
             @else
                 <div class="w-100 overflow-hidden rounded" style="max-height: 500px">
@@ -19,7 +19,8 @@
             @endif
         </div>
         <div class="col-md-7">
-            <form method="POST" action="{{route('dashboard.profile.update', $user)}}" class="mb-3" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('dashboard.profile.update', $user) }}" class="mb-3"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -34,8 +35,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username"
-                        placeholder="username..." value="{{ $user->username }}">
+                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
+                        name="username" placeholder="username..." value="{{ $user->username }}">
                     @error('username')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -52,21 +53,29 @@
                         </div>
                     @enderror
                 </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Change Profile Photo</label>
-                    <img src="" class="img-fluid mb-3 col-sm-5 img-preview">
-                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
-                        onchange="previewImage()">
-                    @error('image')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                
+                @can('edit-profile')
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Change Profile Photo</label>
+                        <img src="" class="img-fluid mb-3 col-sm-5 img-preview">
+                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
+                            onchange="previewImage()">
+                        @error('image')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                @endcan
+
                 <div class="d-grid">
-                    <a href="{{route('dashboard.profile.password.index', $user)}}" class="btn btn-warning btn-block my-3">Change Password</a>
-                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    @can('change-password')
+                        <a href="{{ route('dashboard.profile.password.index', $user) }}"
+                            class="btn btn-warning btn-block my-3">Change Password</a>
+                    @endcan
+
+                    @can('edit-profile')
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    @endcan
                 </div>
             </form>
         </div>

@@ -7,16 +7,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-link {{ ($active === 'home') ? 'active' : null }}" href="/">Home</a>
+            <a class="nav-link {{ Request::is('/') ? 'active' : null }}" href="/">Home</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link {{ ($active === 'about') ? 'active' : null }}" href="/about">About</a>
+            <a class="nav-link {{ Request::is('/about') ? 'active' : null }}" href="/about">About</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link {{ ($active === 'posts') ? 'active' : null }}" href="/blog">Blog</a>
+            <a class="nav-link" href="/blog">Blog</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link {{ ($active === 'categories') ? 'active' : null }}" href="/categories">Categories</a>
+            <a class="nav-link" href="/categories">Categories</a>
             </li>
         </ul>
 
@@ -40,7 +40,7 @@
         @endauth
         @guest
             <li class="nav-item">
-                <a href="/login" class="nav-link {{ ($active === 'login') ? 'active' : null }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                <a href="/login" class="nav-link"><i class="bi bi-box-arrow-in-right"></i> Login</a>
             </li>
         @endguest
         </ul>

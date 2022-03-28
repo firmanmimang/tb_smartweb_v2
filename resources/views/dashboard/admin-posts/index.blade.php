@@ -2,12 +2,9 @@
 
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">My News</h1>
+        <h1 class="h2">All News</h1>
     </div>
     <div class="table-responsive col-lg-12">
-        @can('posts-create')
-            <a href="{{ route('dashboard.posts.create') }}" class="btn btn-primary btn-sm m-1">Create new news</a>
-        @endcan
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -36,7 +33,7 @@
                                 <form action="{{ route('dashboard.posts.highlight', $post) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <button type="submit" class="btn btn-warning">{{ $post->is_highlight ? 'SET FALSE' : 'SET TRUE' }}</button>
+                                    <button type="submit" class="btn {{$post->is_highlight? 'btn-danger': 'btn-success'}}">{{ $post->is_highlight ? 'SET FALSE' : 'SET TRUE' }}</button>
                                 </form>
                             </td>
                         @endcan
@@ -62,5 +59,7 @@
                 @endforeach
             </tbody>
         </table>
+
+        {{$posts->links()}}
     </div>
 @endsection

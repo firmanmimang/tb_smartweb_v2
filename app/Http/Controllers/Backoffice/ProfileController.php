@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -17,6 +18,8 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user)
     {
+        abort_if(Gate::denies("edit-profile"), 403, 'THIS ACTION IS UNAUTHORIZE');
+        
         $validatedData = $request->validate([
             'name' => 'required|max:191',
             'username' => 'required|unique:users,username,'.$user->id,

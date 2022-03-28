@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\News;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -24,7 +24,7 @@ class DashboardPostController extends Controller
         abort_if(Gate::denies("posts-access"), 403, 'THIS ACTION IS UNAUTHORIZE');
         
         return view('dashboard.posts.index', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
+            'posts' => News::where('user_id', auth()->user()->id)->get()
         ]);
     }
 
@@ -71,9 +71,10 @@ class DashboardPostController extends Controller
             $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
             $validatedData['publish_status'] = $validatedData['publish_status'] == 'true' ? true : false;
             $validatedData['comment_status'] = $validatedData['comment_status'] == 'true' ? true : false;
+            $validatedData['is_highlight'] = false;
             
             DB::beginTransaction();
-            Post::create($validatedData);
+            News::create($validatedData);
             DB::commit();
     
             return redirect()->route('dashboard.posts.index')->with('success', 'New post has been added successfuly.');
@@ -91,7 +92,7 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(News $post)
     {
         abort_if(Gate::denies("posts-show"), 403, 'THIS ACTION IS UNAUTHORIZE');
 
@@ -106,7 +107,7 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(News $post)
     {
         abort_if(Gate::denies("posts-edit"), 403, 'THIS ACTION IS UNAUTHORIZE');
 
@@ -124,7 +125,7 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, News $post)
     {
         abort_if(Gate::denies("posts-update"), 403, 'THIS ACTION IS UNAUTHORIZE');
 
@@ -158,7 +159,7 @@ class DashboardPostController extends Controller
             $validatedData['comment_status'] = $validatedData['comment_status'] == 'true' ? true : false;
             
             DB::beginTransaction();
-            Post::where('id', $post->id)->update($validatedData);
+            News::where('id', $post->id)->update($validatedData);
             DB::commit();
     
             return redirect()->route('dashboard.posts.index')->with('success', 'Post '. $post->title .' has been updated.');
@@ -176,7 +177,7 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(News $post)
     {
         abort_if(Gate::denies("posts-delete"), 403, 'THIS ACTION IS UNAUTHORIZE');
 
@@ -186,7 +187,7 @@ class DashboardPostController extends Controller
             }
 
             DB::beginTransaction();
-            Post::destroy($post->id);
+            News::destroy($post->id);
             DB::commit();
 
             return redirect()->route('dashboard.posts.index')->with('success', 'Post '. $post->title .' has been deleted.');
@@ -206,5 +207,27 @@ class DashboardPostController extends Controller
     {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
+    }
+
+    /**
+     * change is_highlight
+     */
+    public function changeIsHighlight(News $news)
+    {
+        abort_if(Gate::denies("change-highlight-news"), 403, 'THIS ACTION IS UNAUTHORIZE');
+
+        try {
+            DB::beginTransaction();
+            $news->is_highlight? $news->is_highlight = false : $news->is_highlight = true;
+            $news->save();
+            DB::commit();
+
+            return back()->with('success', $news->title. ' highlight status changed successfuly.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            //throw $th;
+
+            return back()->with('error', 'Something went wrong.');
+        }
     }
 }

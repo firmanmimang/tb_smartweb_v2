@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ProfilePasswordController extends Controller
 {
@@ -17,6 +18,8 @@ class ProfilePasswordController extends Controller
 
     public function update(Request $request, User $user)
     {
+        abort_if(Gate::denies("change-password"), 403, 'THIS ACTION IS UNAUTHORIZE');
+        
         $validatedData = $request->validate([
             'oldPassword' => 'required',
             'newPassword' => 'required|confirmed',
