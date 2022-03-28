@@ -31,6 +31,7 @@ class RegisterController extends Controller
         $user = User::create($validatedData);
 
         $user->assignRole('subscriber');
+        $user->givePermissionTo(['comment', 'edit-profile', 'change-password']);
 
         return redirect('/login')->with('success', 'Registration successfull! Please login');
     }

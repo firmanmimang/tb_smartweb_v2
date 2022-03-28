@@ -12,7 +12,7 @@
     {{-- style.css --}}
     <link rel="stylesheet" href="/css/style.css">
     
-    <title>Laravel | {{ $title }}</title>
+    <title>{{env('APP_NAME')}} | {{ $title }}</title>
   </head>
   <body>
 
