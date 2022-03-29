@@ -21,7 +21,7 @@ class PostController extends Controller
             $title = 'by '. $author->name;
         }
 
-        return view('posts',[
+        return view('frontend.posts',[
             'title' => 'All Posts '. $title,
             'active' => 'posts',
             // 'posts' => Post::all()

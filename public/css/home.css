@@ -154,3 +154,7 @@
     flex-wrap: wrap; 
     font-size: 12px;   
 }
+
+.active-front{
+  font-weight: bold;
+}

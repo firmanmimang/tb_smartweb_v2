@@ -7,12 +7,24 @@
     <div class="right">
         <ul class="d-flex">
             <div class="search_bar me-auto d-flex justify-content-center align-items-center">
-                <input type="text" placeholder="Search">
+                <form action="{{route('search')}}">
+                    @if (request('category'))
+                        <input type="hidden" name="category" value="{{request('category')}}"> 
+                    @endif
+                    @if (request('author'))
+                        <input type="hidden" name="author" value="{{request('author')}}"> 
+                    @endif
+                    {{-- <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="search..." name="search" value="{{request('search')}}">
+                      <button class="btn btn-dark" type="submit">Button</button>
+                    </div> --}}
+                    <input type="text" placeholder="Search" name="search" value="{{request('search')}}">
+                  </form>
             </div>
             <div class="d-flex justify-content-around align-items-center">
-                <li class="nav-item"><a href="{{route('home')}}" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="{{route('about')}}" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Guest Book</a></li>
+                <li class="nav-item"><a href="{{route('home')}}" class="nav-link @if(Request::is('/')) active-front @endif">Home</a></li>
+                <li class="nav-item"><a href="{{route('about')}}" class="nav-link @if(Request::is('about')) active-front @endif">About Us</a></li>
+                <li class="nav-item"><a href="{{route('guest.book')}}" class="nav-link @if(Request::is('guest-book')) active-front @endif">Guest Book</a></li>
                 <div class="d-flex">
                     @guest
                         <li class="">
