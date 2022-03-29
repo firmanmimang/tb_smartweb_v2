@@ -68,7 +68,7 @@ class DashboardPostController extends Controller
             }
     
             $validatedData['user_id'] = auth()->user()->id;
-            $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
+            $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
             $validatedData['publish_status'] = $validatedData['publish_status'] == 'true' ? true : false;
             $validatedData['comment_status'] = $validatedData['comment_status'] == 'true' ? true : false;
             $validatedData['is_highlight'] = false;
@@ -154,7 +154,7 @@ class DashboardPostController extends Controller
             }
     
             $validatedData['user_id'] = auth()->user()->id;
-            $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
+            $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
             $validatedData['publish_status'] = $validatedData['publish_status'] == 'true' ? true : false;
             $validatedData['comment_status'] = $validatedData['comment_status'] == 'true' ? true : false;
             

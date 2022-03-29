@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('container')
+{{-- @section('container')
     <h1>Post Categories</h1>
 
     <div class="container">
@@ -18,12 +18,4 @@
             @endforeach
         </div>
     </div>
-
-    {{-- @foreach ($categories as $category)
-        <ul>
-            <li>
-                <h2><a href="/categories/{{$category->slug}}">{{$category->name}}</a></h2>
-            </li>
-        </ul>
-    @endforeach --}}
-@endsection
+@endsection --}}

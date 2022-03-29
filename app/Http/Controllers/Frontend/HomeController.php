@@ -11,8 +11,8 @@ class HomeController extends Controller
     {
         // return News::where('publish_status', 1)->where('is_highlight', 1)->take(5)->get();
         return view('frontend.home', [
-            'news' => News::where('publish_status', 1)->get(),
-            'newsHighlight' => News::where('publish_status', 1)->where('is_highlight', 1)->take(5)->get(),
+            'news' => News::where('publish_status', 1)->paginate(9),
+            'newsHighlight' => News::where('publish_status', 1)->where('is_highlight', 1)->orderBy('updated_at', 'DESC')->take(5)->get(),
             'title' => "Home",
         ]);
     }
