@@ -1,7 +1,7 @@
 <div class="top_nav d-flex mt-0">
     <div class="left">
         <a class="navbar-brand d-flex justify-content-center align-items-center" href="#">
-            <img src="img/logo_T.png" width="200" height="50" alt="logo trusted news">
+            <img src="{{asset('img/logo_T.png')}}" width="200" height="50" alt="logo trusted news">
         </a>
     </div>
     <div class="right">
@@ -12,14 +12,15 @@
             <div class="d-flex justify-content-around align-items-center">
                 <li class="nav-item"><a href="{{route('home')}}" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="{{route('about')}}" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Contact Us</a></li>
+                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Guest Book</a></li>
                 <div class="d-flex">
                     @guest
-                        {{-- <li class="">
-                            <a href="{{ route('register') }}" class="nav-link">Register</a>
-                        </li> --}}
                         <li class="">
-                            <a href="{{ route('login') }}" class="nav-link"><i class="bi bi-box-arrow-in-right"></i>
+                            <a href="{{ route('register') }}" class="nav-link">Register</a>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('login') }}" class="nav-link">
+                                {{-- <i class="bi bi-box-arrow-in-right"></i> --}}
                                 Login</a>
                         </li>
                     @endguest
@@ -31,8 +32,7 @@
                                 Welcome back, {{ auth()->user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/dashboard"><i
-                                            class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
+                                <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

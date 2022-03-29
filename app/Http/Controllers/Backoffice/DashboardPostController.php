@@ -24,7 +24,7 @@ class DashboardPostController extends Controller
         abort_if(Gate::denies("posts-access"), 403, 'THIS ACTION IS UNAUTHORIZE');
         
         return view('dashboard.posts.index', [
-            'posts' => News::where('user_id', auth()->user()->id)->get()
+            'posts' => News::where('user_id', auth()->user()->id)->latest()->get()
         ]);
     }
 

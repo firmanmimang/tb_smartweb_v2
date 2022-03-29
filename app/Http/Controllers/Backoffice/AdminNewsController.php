@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backoffice;
 
+use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,7 @@ class AdminNewsController extends Controller
     public function index()
     {
         return view('dashboard.admin-posts.index', [
-            'posts' => News::paginate(10),
+            'posts' => News::latest()->paginate(10),
         ]);
     }
 }

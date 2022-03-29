@@ -4,46 +4,37 @@
     <div class="wrapper">
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
-                <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-                <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+                @foreach ($newsHighlight as $index => $item)
+                    <li data-bs-target="#myCarousel" data-bs-slide-to="{{ $index }}" class="active"></li>
+                @endforeach
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="2000">
-                    <div class="overlay-image"
-                        style="background-image:url(https://www.die-tagespost.de/storage/image/3/3/9/1/71933_artdetail-responsive-911w_1xQNG5_p5a5Lq.webp);">
+                @forelse ($newsHighlight as $index => $highlight)
+                <a href="{{route('news.detail', $highlight)}}">
+                    <div class="carousel-item {{$index == 0 ? 'active' : null}}" data-bs-interval="4000">
+                        <div class="overlay-image"
+                            @if($highlight->image)
+                                style="background-image:url({{asset('storage/'.$highlight->image)}});">
+                            @else
+                                style="background-image:url({{asset('img/no_image_available.png')}});">
+                            @endif
+                        </div>
+                        <div class="container">
+                            <h3>{{$highlight->title}}</h3>
+                            <p>{{$highlight->excerpt}}</p>
+                        </div>
+                    </div>
+                </a>
+                @empty
+                <div class="carousel-item active" data-bs-interval="4000">
+                    <div class="overlay-image" style="background-image:url({{asset('img/no_image_available.png')}});">
                     </div>
                     <div class="container">
-                        <h3>Ukraine conflict: touch and go with balance of power</h3>
-                        <p>As the year draws to an end, Moscow has once again adopted a harsher tone in the Ukraine
-                            conflict. Russian troops remain stationed near the border and President Putin has accused
-                            the US of "aggressive" behaviour and threatened to respond "with adequate military-technical
-                            measures" if it persists. Commentators analyse the balance of power.</p>
+                        <h3>No highlight</h3>
+                        {{-- <p></p> --}}
                     </div>
                 </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <div class="overlay-image"
-                        style="background-image:url(https://img.beritasatu.com/cache/investor/798x449-2/1642559792.jpg);">
-                    </div>
-                    <div class="container">
-                        <h3>Conglomerate Salim caught up in Indonesia's cooking oil crisis</h3>
-                        <p>The cooking oil crisis in Indonesia, the world's largest producer of palm oil, is taking a
-                            new twist as allegations emerge of companies hoarding the commodity to sell at higher prices
-                            -- including one affiliated with Salim Group, one of the country's largest conglomerates.
-                        </p>
-                    </div>
-                </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <div class="overlay-image"
-                        style="background-image:url(https://covid19.go.id/storage/app/uploads/public/623/d86/32d/623d8632ded1c153419597.png);">
-                    </div>
-                    <div class="container">
-                        <h3>Acceleration of Handling COVID-19 in Indonesia (Update as of March 25, 2022)</h3>
-                        <p>COVID-19 Healing Rate Reaches 5,691,220 People. Based on data from the Covid-19 Task Force,
-                            the highest addition was in West Java with 1,125 cases. In second place is DKI Jakarta with
-                            890 cases, then Central Java with 501 cases.</p>
-                    </div>
-                </div>
+                @endforelse
             </div>
             <a href="#myCarousel" class="carousel-control-prev" role="button" data-bs-slide="prev">
                 <span class="sr-only"></span>
@@ -55,7 +46,7 @@
             </a>
         </div>
     </div>
-    <!--content card - EDITORIAL'S PICK -->
+    {{-- <!--content card - EDITORIAL'S PICK -->
     <div>
         <div class="container text-center py-5">
             <h6 class="display-4">EDITORIAL'S PICK</h6>
@@ -443,5 +434,5 @@
     </div>
     <div class="container py-5">
         <h6 class="display-4">Meet Our Team</h6>
-    </div>
+    </div> --}}
 @endsection

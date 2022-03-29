@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\NewsDetailController;
 use App\Http\Controllers\PostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -12,8 +13,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // about us
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-// contact us
-Route::get('/contact', function () {
+// guest book
+Route::get('/guest-book', function () {
     return view('about',[
         'title' => 'About',
         'active' => 'about',
@@ -22,6 +23,8 @@ Route::get('/contact', function () {
         'image' => 'firman.jpg'
     ]);
 })->name('contact');
+
+Route::get('news/{news:slug}', [NewsDetailController::class, 'index'])->name('news.detail');
 
 
 Route::get('/blog', [PostController::class, 'index']);

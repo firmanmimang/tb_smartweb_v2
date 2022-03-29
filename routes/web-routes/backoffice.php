@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminNewsController;
+use App\Http\Controllers\Backoffice\AdminNewsController;
 use App\Http\Controllers\Backoffice\AdminCategoryController;
 use App\Http\Controllers\Backoffice\AdminUserController;
 use App\Http\Controllers\Backoffice\DashboardPostController;
