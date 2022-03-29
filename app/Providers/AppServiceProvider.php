@@ -30,7 +30,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        View::share('categoriesGlobal', Category::get(['name', 'slug']));
+        $category = Category::get(['name', 'slug']);
+
+        // dd(array_chunk(Category::get(['name', 'slug'])->toArray(), 2));
+        // die;
+        View::share('categoriesGlobal', $category);
+        View::share('categoriesFooter', array_chunk($category->toArray(), 2));
 
         // permisson posts (news) crud
         Gate::define('posts-access', function(User $user){

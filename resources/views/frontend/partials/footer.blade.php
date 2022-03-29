@@ -3,23 +3,17 @@
         <div class="row">
             <div class="footer-col">
                 <div class="icon d-flex justify-content-around flex-nowrap">
-                    <img src="{{asset('img/Logo_T_putih.png')}}" width="60" height="70" alt="logo trusted news">
+                    <img src="{{ asset('img/Logo_T_putih.png') }}" width="60" height="70" alt="logo trusted news">
                     <div class="category flex-nowrap">
                         <ul class="ms-3 p-0">
-                            <li><a href="#">WORLD</a></li>
-                            <li><a href="#">POLITICS</a></li>
-                            <li><a href="#">BUSINESS</a></li>
-                            <li><a href="#">SCIENCE</a></li>
-                            <li><a href="#">TECHNOLOGY</a></li>
-                            <li><a href="#">CARS</a></li>
+                            @foreach ($categoriesFooter[0] as $category)
+                                <li><a href="#">{{$category['name']}}</a></li>
+                            @endforeach
                         </ul>
                         <ul class="ms-3 p-0">
-                            <li><a href="#">SPORTS</a></li>
-                            <li><a href="#">RELIGION</a></li>
-                            <li><a href="#">ENTERTAIMENT</a></li>
-                            <li><a href="#">FAMILY</li>
-                            <li><a href="#">HEALTH</a></li>
-                            <li><a href="#">TRAVEL</a></li>
+                            @foreach ($categoriesFooter[1] as $category)
+                                <li><a href="#">{{$category['name']}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -28,8 +22,8 @@
                 <div class="about">
                     <h5>
                         <ul class="m-0 p-0">
-                            <li class="mb-3"><a href="{{route('home')}}">HOME</a></li>
-                            <li class="mb-3"><a href="{{route('about')}}">ABOUT US</a></li>
+                            <li class="mb-3"><a href="{{ route('home') }}">HOME</a></li>
+                            <li class="mb-3"><a href="{{ route('about') }}">ABOUT US</a></li>
                             <li class="mb-3"><a href="#">GUEST BOOK</a></li>
                         </ul>
                     </h5>
