@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\GuestBookController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsDetailController;
 use App\Http\Controllers\Frontend\SearchController;
@@ -15,15 +16,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 // guest book
-Route::get('/guest-book', function () {
-    return view('about',[
-        'title' => 'About',
-        'active' => 'about',
-        'name' => 'Firman Hidayat',
-        'email' => 'fhidayat131@gmail.com',
-        'image' => 'firman.jpg'
-    ]);
-})->name('guest.book');
+Route::get('/guest-book', [GuestBookController::class, 'index'])->name('guest.book');
 
 // search news purpose
 Route::get('/search', [SearchController::class, 'index'])->name('search');

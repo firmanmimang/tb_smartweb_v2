@@ -32,5 +32,9 @@
                 {!! $news->body !!}
             </div>
         </article>
+
+        <div>
+            
+        </div>
     </div>
 @endsection

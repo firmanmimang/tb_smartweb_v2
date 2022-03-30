@@ -10,15 +10,13 @@
     {{-- bootstrap icon --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     {{-- style.css --}}
-    <link rel="stylesheet" href="/css/style.css">
+    {{-- <link rel="stylesheet" href="/css/style.css"> --}}
     
     <title>{{env('APP_NAME')}} | {{ $title }}</title>
   </head>
-  <body>
+  <body class="overflow-hidden">
 
-    <div class="container mt-4">
-        @yield('container')
-    </div>
+    @yield('container')
 
     <!-- Optional JavaScript; choose one of the two! -->
 
