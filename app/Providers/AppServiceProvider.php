@@ -31,11 +31,13 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         $category = Category::get(['name', 'slug']);
-
-        // dd(array_chunk(Category::get(['name', 'slug'])->toArray(), 2));
-        // die;
         View::share('categoriesGlobal', $category);
         View::share('categoriesFooter', array_chunk($category->toArray(), 2));
+
+        // permission comment
+        Gate::define('comment', function(User $user){
+            return $user->hasPermissionTo('comment');
+        });
 
         // permisson posts (news) crud
         Gate::define('posts-access', function(User $user){

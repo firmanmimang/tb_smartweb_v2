@@ -21,20 +21,23 @@ Route::get('/guest-book', [GuestBookController::class, 'index'])->name('guest.bo
 // search news purpose
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
-// news detail
-Route::get('news/{news:slug}', [NewsDetailController::class, 'index'])->name('news.detail');
-
-
-Route::get('/blog', [PostController::class, 'index']);
+// comment post on news detail middleware auth
+Route::post('{news:slug}', [NewsDetailController::class, 'storeComment'])->name('news.store.comment')->middleware('auth');
 
 // news detail
-Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+Route::get('{news:slug}', [NewsDetailController::class, 'index'])->name('news.detail');
 
-// show all categories
-Route::get('/categories', function(){
-    return view('categories',[
-        'title' => 'Post Categories',
-        'active' => 'categories',
-        'categories' => Category::all()
-    ]);
-});
+
+// Route::get('/blog', [PostController::class, 'index']);
+
+// // news detail
+// Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+
+// // show all categories
+// Route::get('/categories', function(){
+//     return view('categories',[
+//         'title' => 'Post Categories',
+//         'active' => 'categories',
+//         'categories' => Category::all()
+//     ]);
+// });

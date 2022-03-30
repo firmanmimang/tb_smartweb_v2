@@ -11,12 +11,12 @@
 |
 */
 
-// list routing frontend
-require __DIR__.'/web-routes/frontend.php';
 // list routing backoffice
 require __DIR__.'/web-routes/backoffice.php';
 // list routing auth
 require __DIR__.'/web-routes/auth.php';
+// list routing frontend
+require __DIR__.'/web-routes/frontend.php';
 
 // Route::get('info', function(){
 //     return view('info');

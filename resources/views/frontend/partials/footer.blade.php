@@ -7,12 +7,12 @@
                     <div class="category flex-nowrap">
                         <ul class="ms-3 p-0">
                             @foreach ($categoriesFooter[0] as $category)
-                                <li><a href="#">{{$category['name']}}</a></li>
+                                <li><a href="{{route('search', ['category' => $category['slug']])}}">{{$category['name']}}</a></li>
                             @endforeach
                         </ul>
                         <ul class="ms-3 p-0">
                             @foreach ($categoriesFooter[1] as $category)
-                                <li><a href="#">{{$category['name']}}</a></li>
+                                <li><a href="{{route('search', ['category' => $category['slug']])}}">{{$category['name']}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -24,7 +24,7 @@
                         <ul class="m-0 p-0">
                             <li class="mb-3"><a href="{{ route('home') }}">HOME</a></li>
                             <li class="mb-3"><a href="{{ route('about') }}">ABOUT US</a></li>
-                            <li class="mb-3"><a href="#">GUEST BOOK</a></li>
+                            <li class="mb-3"><a href="{{route('guest.book')}}">GUEST BOOK</a></li>
                         </ul>
                     </h5>
                 </div>

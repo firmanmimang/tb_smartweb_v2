@@ -1,6 +1,6 @@
 <div class="top_nav d-flex mt-0">
     <div class="left">
-        <a class="navbar-brand d-flex justify-content-center align-items-center" href="#">
+        <a class="navbar-brand d-flex justify-content-center align-items-center" href="{{route('home')}}">
             <img src="{{asset('img/logo_T.png')}}" width="200" height="50" alt="logo trusted news">
         </a>
     </div>
