@@ -5,8 +5,6 @@ use App\Http\Controllers\Frontend\GuestBookController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsDetailController;
 use App\Http\Controllers\Frontend\SearchController;
-use App\Http\Controllers\PostController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 // homepage
@@ -17,6 +15,7 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 // guest book
 Route::get('/guest-book', [GuestBookController::class, 'index'])->name('guest.book');
+Route::post('/guest-book', [GuestBookController::class, 'store']);
 
 // search news purpose
 Route::get('/search', [SearchController::class, 'index'])->name('search');
