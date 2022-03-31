@@ -88,42 +88,10 @@
             </form>
         </div>
 
-        {{-- <div class="row justify-content-center">
-            @forelse ($guest_comments as $comment)
-                <div class="row text-dark" style="border-top: 1px solid black; border-bottom: 1px solid black">
-                    <div class="col-12">
-                        {{$comment->name}}
-                        {{$comment->email}}
-                    </div>
-                    <div class="col-12">
-                        {{$comment->message}}
-                    </div>
-                </div>
-            @empty
-                <div>
-                    No Message From Guest
-                </div>
-            @endforelse
-        </div> --}}
-
         <div class="my-5">
             @foreach ($guest_comments as $comment)
                 <div class="container py-3" style="border-bottom: 1px solid black; border-top: 1px solid black;">
                     <div class="row mb-2">
-                        {{-- <div class="col-1 d-flex justify-content-center align-items-center">
-                            @if ($comment->user->image)
-                                <div class="overflow-hidden" style="width: 50px; height: 50px; border-radius: 50%">
-                                    <img src="{{ asset('storage/' . $comment->user->image) }}"
-                                        alt="{{ $comment->user->name }} photo" class="w-100"
-                                        style="object-fit: cover">
-                                </div>
-                            @else
-                                <div class="overflow-hidden" style="width: 50px; height: 50px; border-radius: 50%">
-                                    <img src="{{ asset('img/no-profile.png') }}" alt="no-photo" width="50"
-                                        class="img-fluid" style="">
-                                </div>
-                            @endif
-                        </div> --}}
                         <div class="col-11 d-flex flex-column justify-content-center align-items-start text-dark">
                             <div>
                                 {{ $comment->name }}

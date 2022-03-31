@@ -95,7 +95,7 @@
         {{-- team --}}
         <div class="row my-4">
             <div class="col-md-3 pe-0">
-                <img src="https://obs.line-scdn.net/0hZU6sHdKPBXoLChEhj4R6LTNcCQs4bB9zKWpNHSsJU0NyJkF-YmpWGXkPC1Z2OEAoK24ZHn5ZC050aUIuMA/w644" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">
+                <img src="{{asset('img/team/firman.jpeg')}}" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">
             </div>
             <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="background-color: rgb(13,110,253)">
                 <div class="p-3">
@@ -106,8 +106,8 @@
                 </div>
             </div>
             <div class="col-md-3 p-0">
-                <img src="https://obs.line-scdn.net/0hZU6sHdKPBXoLChEhj4R6LTNcCQs4bB9zKWpNHSsJU0NyJkF-YmpWGXkPC1Z2OEAoK24ZHn5ZC050aUIuMA/w644"
-                width="250" height="300" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">>
+                <img src="{{asset('img/team/pandya.jpg')}}"
+                alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">>
             </div>
             <div class="col-md-3 ps-0 d-flex flex-column justify-content-center align-items-center">
                 <div class="p-3" style="color: black">
@@ -127,7 +127,7 @@
                 </div>
             </div>
             <div class="col-md-3 p-0">
-                <img src="https://obs.line-scdn.net/0hZU6sHdKPBXoLChEhj4R6LTNcCQs4bB9zKWpNHSsJU0NyJkF-YmpWGXkPC1Z2OEAoK24ZHn5ZC050aUIuMA/w644"
+                <img src="{{asset('img/team/rolland.jpg')}}"
                 width="250" height="200" alt="" class="w-100 w-100" alt="" style="height: 100%; object-fit: cover">>
             </div>
             <div class="col-md-3 p-0 d-flex flex-column justify-content-center align-items-center">
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <div class="col-md-3 ps-0">
-                <img src="https://obs.line-scdn.net/0hZU6sHdKPBXoLChEhj4R6LTNcCQs4bB9zKWpNHSsJU0NyJkF-YmpWGXkPC1Z2OEAoK24ZHn5ZC050aUIuMA/w644"
+                <img src="{{asset('img/team/firman.jpeg')}}"
                 width="250" height="200" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">>
             </div>
         </div>

@@ -25,18 +25,3 @@ Route::post('{news:slug}', [NewsDetailController::class, 'storeComment'])->name(
 
 // news detail
 Route::get('{news:slug}', [NewsDetailController::class, 'index'])->name('news.detail');
-
-
-// Route::get('/blog', [PostController::class, 'index']);
-
-// // news detail
-// Route::get('/posts/{post:slug}', [PostController::class, 'show']);
-
-// // show all categories
-// Route::get('/categories', function(){
-//     return view('categories',[
-//         'title' => 'Post Categories',
-//         'active' => 'categories',
-//         'categories' => Category::all()
-//     ]);
-// });
