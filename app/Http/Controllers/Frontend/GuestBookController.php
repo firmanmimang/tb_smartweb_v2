@@ -12,6 +12,7 @@ class GuestBookController extends Controller
     public function index()
     {
         return view('frontend.guest-book',[
+            'title' => 'Guest Book',
             'guest_comments' => GuestBook::get(),
         ]);
     }
