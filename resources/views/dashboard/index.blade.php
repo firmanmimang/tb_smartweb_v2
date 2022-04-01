@@ -4,10 +4,12 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Welcome Back, {{auth()->user()->name}}</h1>
     </div>
-    {{auth()->user()->getRoleNames()[0]}} <br>
-    @foreach (auth()->user()->getAllPermissions() as $item)
-        {{$item->name}} <br>
-    @endforeach
+    Role : {{auth()->user()->getRoleNames()[0]}} <br>
+    Access Permission : <br>
+    <ul>
+        @foreach (auth()->user()->getAllPermissions() as $item)
+            <li>{{$item->name}}</li>
+        @endforeach
+    </ul>
     <br>
-    {{auth()->user()->hasPermissionTo("posts-access")}}
 @endsection

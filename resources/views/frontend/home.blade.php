@@ -21,7 +21,7 @@
                                     <div style="background-color: black; opacity: .7;">
                                         <h3 class="p-2 pb-0">{{ $highlight->title }}</h3>
                                         <p class="px-2 py-0"> <span class="text-decoration-none"
-                                                style="color:beige;">by</span> <a class="text-decoration-none"
+                                                style="color:beige;"></span> <a class="text-decoration-none"
                                                 href="/blog?author={{ $highlight->author->username }}">{{ $highlight->author->name }}</a>
                                             in <a class="text-decoration-none"
                                                 href="/blog?category={{ $highlight->category->slug }}">{{ $highlight->category->name }}</a>.
