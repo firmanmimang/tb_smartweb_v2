@@ -57,7 +57,7 @@
     <div class="container-fluid my-5">
         <h1 class="mx-5 my-3">Latest News</h1>
         <div class="row align-items-stretch">
-            @foreach ($news as $p)
+            @forelse ($news as $p)
                 <div class="col-md-4 mb-3">
                     <div class="card" style="height: 100%">
                         <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)">
@@ -86,7 +86,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="text-danger text-center">
+                    <h2>No News</h2>
+                </div>
+            @endforelse
         </div>
         <div class="d-flex justify-content-end mb-5">
             {{$news->links()}}
@@ -97,7 +101,7 @@
             <div class="col-md-3 pe-0">
                 <img src="{{asset('img/team/firman.jpeg')}}" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">
             </div>
-            <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="background-color: rgb(13,110,253)">
+            <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="background-color: #14A2DF;">
                 <div class="p-3">
                     <h5 class="card-title">Firman Hidayat</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
@@ -143,7 +147,7 @@
                 width="250" height="200" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">>
             </div>
         </div>
-        <h6 class="display-4 text-end">Meet Our Team</h6>
+        <h6 class="display-4 text-end" style="color: #14A2DF;">Meet Our Team</h6>
     </div>
 
     {{-- <!--content card - EDITORIAL'S PICK -->

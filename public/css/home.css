@@ -26,7 +26,7 @@
     align-items: center;
   } 
      
-  .wrapper .top_nav .right .search_bar input[type="text"]{
+  .search_bar input[type="text"]{
     border: 1px solid #666666;
     width: 200px;
     padding: 5px 10px;
@@ -34,7 +34,7 @@
     transition: all 0.2s ease-in-out;
   }
   
-  .wrapper .top_nav .right .search_bar input[type="text"]:focus{
+  .search_bar input[type="text"]:focus{
     width: 240px;
   }
 
@@ -158,4 +158,14 @@
 
 .active-front{
   font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+  .margin-top-3-lg-custom-home{
+    margin-top: 1.3rem;
+  }
+
+  .width-100-lg-custom-home{
+    width: 100% !important;
+  }
 }

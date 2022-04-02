@@ -13,12 +13,12 @@ class SearchController extends Controller
     {
         $title = '';
         if(request('category')){
-            $category = Category::firstWhere('slug', request('category'));
+            $category = Category::where('slug', request('category'))->firstOrFail();
             $title = 'in '. $category->name. ' Category';
         }
 
         if(request('author')){
-            $author = User::firstWhere('username', request('author'));
+            $author = User::where('username', request('author'))->firstOrFail();
             $title = 'by '. $author->name;
         }
 
