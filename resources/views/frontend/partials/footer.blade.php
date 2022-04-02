@@ -5,16 +5,18 @@
                 <div class="icon d-flex justify-content-around flex-nowrap">
                     <img src="{{ asset('img/Logo_T_putih.png') }}" width="60" height="70" alt="logo trusted news">
                     <div class="category flex-nowrap">
-                        <ul class="ms-3 p-0">
-                            @foreach ($categoriesFooter[0] as $category)
-                                <li><a href="{{route('search', ['category' => $category['slug']])}}">{{$category['name']}}</a></li>
-                            @endforeach
-                        </ul>
-                        <ul class="ms-3 p-0">
-                            @foreach ($categoriesFooter[1] as $category)
-                                <li><a href="{{route('search', ['category' => $category['slug']])}}">{{$category['name']}}</a></li>
-                            @endforeach
-                        </ul>
+                        @isset($categoriesFooter[0])
+                            <ul class="ms-3 p-0">
+                                @foreach ($categoriesFooter[0] as $category)
+                                    <li><a href="{{route('search', ['category' => $category['slug']])}}">{{$category['name']}}</a></li>
+                                @endforeach
+                            </ul>
+                            <ul class="ms-3 p-0">
+                                @foreach ($categoriesFooter[1] as $category)
+                                    <li><a href="{{route('search', ['category' => $category['slug']])}}">{{$category['name']}}</a></li>
+                                @endforeach
+                            </ul>
+                        @endisset
                     </div>
                 </div>
             </div>
