@@ -20,14 +20,18 @@
 
         <h1 class="mb-5">About Us</h1>
 
-        <div class="mb-5">
-            <h2 class="mb-4">Address</h2>
-            <ul class="m-0 ps-4 p-0">
-                <li>Jl.Raya, RT.4/RW.1,</li>
-                <li>Meruya Sel, Kec.Kembangan</li>
-                <li>Jakarta,DKI Jakarta</li>
-                <li>11650</li>
-            </ul>
+        <div class="mb-5 row">
+            <div class="col-md-2">
+                <h2 class="mb-4 text-dark">Address</h2>
+            </div>
+            <div class="col-md-10">
+                <ul class="ms-0 mt-5 ps-4 p-0 text-dark">
+                    <li>Jl.Raya, RT.4/RW.1,</li>
+                    <li>Meruya Sel, Kec.Kembangan</li>
+                    <li>Jakarta,DKI Jakarta</li>
+                    <li>11650</li>
+                </ul>
+            </div>
         </div>
 
         <div class="mb-5 row">

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-xl navbar-light">
-    <div class="container">
+    <div class="container-fluid">
         <div class="left">
             <a class="navbar-brand d-flex justify-content-center align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('img/logo_T.png') }}" width="200" height="50" alt="logo trusted news">
