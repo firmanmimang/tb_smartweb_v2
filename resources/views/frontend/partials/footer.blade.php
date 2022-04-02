@@ -1,4 +1,7 @@
-<footer class="footer">
+<footer class="footer position-relative">
+    {{-- for scrollTop javascript location footer --}}
+    <div style="opacity: 0; position: absolute; top: 0; left: 0;" id="positionFooter"></div>
+    {{-- ----------------------------------------- --}}
     <div class="container">
         <div class="row">
             <div class="footer-col">

@@ -1,0 +1,27 @@
+.scroll{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    z-index: 9999;
+}
+
+.scroll button {
+    color: black;
+    border: 0;
+
+    width: 40px;
+    height: 40px;
+
+    background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all .2s ease-in-out;
+}
+
+.scroll:hover button{
+    margin-bottom: 5px;
+}
