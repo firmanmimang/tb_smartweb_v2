@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,9 +31,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        $category = Category::get(['name', 'slug']);
-        View::share('categoriesGlobal', $category);
-        View::share('categoriesFooter', array_chunk($category->toArray(), 2));
+        if (Schema::hasColumn('categories', 'name')){
+            $category = Category::get(['name', 'slug']);
+            View::share('categoriesGlobal', $category);
+            View::share('categoriesFooter', array_chunk($category->toArray(), 2));
+        }
 
         // permission comment
         Gate::define('comment', function(User $user){
