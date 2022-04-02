@@ -35,7 +35,7 @@
                 {!! $news->body !!}
             </div>
         </article>
-        @if (!$news->comment_status)
+        @if ($news->comment_status)
             <div class="container mt-4 mb-5" style="border-bottom: 1px solid black; border-top: 1px solid black;">
                 @if (session()->has('success'))
                     <div class="alert alert-success alert-dismissible fade show my-3" role="alert">

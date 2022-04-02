@@ -82,7 +82,7 @@
                     style="position: absolute; top:10px; left:10px; background-color: black;">&lt; Back to Home</a>
                 <img src="{{ asset('img/Logo_T_hitam.png') }}" height="50" alt="logo trusted news">
                 <h3 class="mt-4">Create Account</h3>
-                <small class="d-block text-center mb-4">Already have an account ? <a href="/login">Login</a></small>
+                <small class="d-block text-center mb-4">Already have an account? <a href="/login">Login</a></small>
                 <form action="/register" method="POST" style="width: 50%">
                     @csrf
                     <div class="mb-3 d-flex align-items-center justify-content-between">

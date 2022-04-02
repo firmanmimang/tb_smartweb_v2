@@ -99,7 +99,7 @@
             </div>
             <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="background-color: rgb(13,110,253)">
                 <div class="p-3">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Firman Hidayat</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                         additional content. This content is a little bit longer.</p>
                     <p class="card-text"><small class="text-muted"></small></p>
@@ -111,7 +111,7 @@
             </div>
             <div class="col-md-3 ps-0 d-flex flex-column justify-content-center align-items-center">
                 <div class="p-3" style="color: black">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Pandya Yassar Dewananto</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                         additional content. This content is a little bit longer.</p>
                     <p class="card-text"><small class="text-muted"></small></p>
@@ -120,7 +120,7 @@
             {{-- row 2 team --}}
             <div class="col-md-3 pe-0 d-flex flex-column justify-content-center align-items-center">
                 <div class="p-3" style="color: black">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Mochammad Rolland Akbar</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                         additional content. This content is a little bit longer.</p>
                     <p class="card-text"><small class="text-muted"></small></p>
@@ -132,14 +132,14 @@
             </div>
             <div class="col-md-3 p-0 d-flex flex-column justify-content-center align-items-center">
                 <div class="p-3" style="color: black">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Luthfi Januar Aulia</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                         additional content. This content is a little bit longer.</p>
                     <p class="card-text"><small class="text-muted"></small></p>
                 </div>
             </div>
             <div class="col-md-3 ps-0">
-                <img src="{{asset('img/team/firman.jpeg')}}"
+                <img src="{{asset('img/team/luthfi.jpg')}}"
                 width="250" height="200" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">>
             </div>
         </div>
