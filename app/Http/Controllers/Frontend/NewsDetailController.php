@@ -25,7 +25,7 @@ class NewsDetailController extends Controller
     public function storeComment(Request $request, News $news)
     {
         abort_if(Gate::denies("comment"), 403, 'THIS ACTION IS UNAUTHORIZE');
-        abort_if($news->comment_status, 403, 'COMMENT TURN OFF');
+        abort_if(!$news->comment_status, 403, 'COMMENT TURN OFF');
 
         $request->validate([
             'comment' => ['required', 'string']

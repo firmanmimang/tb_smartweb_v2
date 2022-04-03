@@ -55,15 +55,49 @@ class DatabaseSeeder extends Seeder
             'name' => 'Programming',
             'slug' => 'programming'
         ]);
-
         Category::create([
             'name' => 'Web Design',
             'slug' => 'web-design'
         ]);
-
         Category::create([
             'name' => 'Personal',
             'slug' => 'personal'
+        ]);
+        Category::create([
+            'name' => 'Otomitif',
+            'slug' => 'otomitif'
+        ]);
+        Category::create([
+            'name' => 'Kampus',
+            'slug' => 'kampus'
+        ]);
+        Category::create([
+            'name' => 'Coba',
+            'slug' => 'coba'
+        ]);
+        Category::create([
+            'name' => 'CobaLagi',
+            'slug' => 'coba-lagi'
+        ]);
+        Category::create([
+            'name' => 'CobaCoba',
+            'slug' => 'coba-coba'
+        ]);
+        Category::create([
+            'name' => 'CobaCobaCoba',
+            'slug' => 'coba-coba-coba'
+        ]);
+        Category::create([
+            'name' => 'CobaTest',
+            'slug' => 'coba-test'
+        ]);
+        Category::create([
+            'name' => 'CobaLagiLagi',
+            'slug' => 'coba-lagi-lagi'
+        ]);
+        Category::create([
+            'name' => 'OK OK',
+            'slug' => 'ok-ok'
         ]);
 
         News::factory(20)->create();

@@ -24,14 +24,14 @@
     <title>{{env('APP_NAME')}} | {{ $title ?? '' }}</title>
 </head>
 
-<body>
+<body class="overflow-x-hidden d-flex flex-column" style="min-height: 100vh;">
     {{-- navbar --}}
     <div class="wrapper">
         <!-- navbar atas -->
         @include('frontend.partials.top-nav')
         <!-- navbar bawah -->
-        @include('frontend.partials.bottom-nav')
     </div>
+    @include('frontend.partials.bottom-nav')
 
     {{-- main content --}}
     @yield('content')

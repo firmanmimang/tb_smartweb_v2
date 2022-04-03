@@ -54,7 +54,7 @@ class DashboardPostController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'slug' => 'required|unique:posts',
+            'slug' => 'required|unique:news',
             'category_id' => 'required',
             'image' => 'image|file|max:1024',
             'body' => 'required',
@@ -139,7 +139,7 @@ class DashboardPostController extends Controller
         ];
 
         ($request->slug != $post->slug)?
-            $rules['slug'] = 'required|unique:posts'
+            $rules['slug'] = 'required|unique:news'
             : null
         ;
 
@@ -205,7 +205,7 @@ class DashboardPostController extends Controller
      */
     public function checkSlug(Request $request)
     {
-        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+        $slug = SlugService::createSlug(News::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
     }
 

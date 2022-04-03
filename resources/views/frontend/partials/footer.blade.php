@@ -1,29 +1,29 @@
-<footer class="footer position-relative">
+<footer class="footer position-relative mt-auto">
     {{-- for scrollTop javascript location footer --}}
     <div style="opacity: 0; position: absolute; top: 0; left: 0;" id="positionFooter"></div>
     {{-- ----------------------------------------- --}}
     <div class="container">
         <div class="row">
-            <div class="footer-col">
-                <div class="icon d-flex justify-content-around flex-nowrap">
-                    <img src="{{ asset('img/Logo_T_putih.png') }}" width="60" height="70" alt="logo trusted news">
+            <div class="col-xl-3 col-lg-6">
+                <div class="icon mb-3">
+                    <img src="{{ asset('img/Logo_T_putih.png') }}" height="100" alt="logo trusted news">
                     <div class="category flex-nowrap">
                         @isset($categoriesFooter[0])
                             <ul class="ms-3 p-0">
                                 @foreach ($categoriesFooter[0] as $category)
-                                    <li><a href="{{route('search', ['category' => $category['slug']])}}">{{$category['name']}}</a></li>
+                                    <li><a href="{{route('search', ['category' => $category['slug']])}}" style="word-wrap: break-word; display: inline-block;">{{$category['name']}}</a></li>
                                 @endforeach
                             </ul>
                             <ul class="ms-3 p-0">
                                 @foreach ($categoriesFooter[1] as $category)
-                                    <li><a href="{{route('search', ['category' => $category['slug']])}}">{{$category['name']}}</a></li>
+                                    <li><a href="{{route('search', ['category' => $category['slug']])}}" style="word-wrap: break-word; display: inline-block;">{{$category['name']}}</a></li>
                                 @endforeach
                             </ul>
                         @endisset
                     </div>
                 </div>
             </div>
-            <div class="footer-col justify-content-center">
+            <div class="col-xl-3 col-lg-6 d-sm-flex flex-column align-items-center mb-3">
                 <div class="about">
                     <h5>
                         <ul class="m-0 p-0">
@@ -34,7 +34,7 @@
                     </h5>
                 </div>
             </div>
-            <div class="footer-col justify-content-center">
+            <div class="col-xl-3 col-lg-6 mb-3">
                 <div class="guest">
                     <h5>ADDRESS</h5>
                     <ul class="m-0 p-0">
@@ -45,8 +45,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="footer-col justify-content-start">
-                <div class="talk">
+            <div class="col-xl-3 col-lg-6 mb-3">
+                <div class="talk mb-3">
                     <h5>LET'S TALK</h5>
                     <ul class="m-0 p-0">
                         <li><a href="#">Office: +62 81212121212</a></li>
@@ -54,7 +54,7 @@
                 </div>
                 <div>
                     <h4>Follow Us</h4>
-                    <div class="social-links d-flex justify-content-around">
+                    <div class="social-links d-flex justify-content-around" style="width: 60%">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
