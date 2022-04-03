@@ -48,7 +48,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Welcome back, {{ auth()->user()->name }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 99999">
                             <li><a class="dropdown-item" href="/dashboard"><i
                                         class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
                             <li>

@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-6 d-sm-flex flex-column align-items-center mb-3">
+            <div class="col-xl-3 col-lg-6 d-xl-flex flex-column align-items-center mb-3">
                 <div class="about">
                     <h5>
                         <ul class="m-0 p-0">
