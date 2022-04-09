@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         if (Schema::hasColumn('categories', 'name')){
             $category = Category::get(['name', 'slug']);
             View::share('categoriesGlobal', $category);
-            View::share('categoriesFooter', array_chunk($category->toArray(), ceil(count($category)/2)));
+            View::share('categoriesFooter', count($category) > 0 ? array_chunk($category->toArray(), ceil(count($category)/2)) : null);
         }
 
         // permission comment

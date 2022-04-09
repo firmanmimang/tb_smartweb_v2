@@ -24,7 +24,7 @@ class SearchController extends Controller
 
         return view('frontend.search', [
             'title' => 'Searching News '. $title,
-            'news' => News::latest()->filter(request(['search', 'category', 'author']))->paginate(12)->withQueryString()
+            'news' => News::orderBy('published_at', 'DESC')->filter(request(['search', 'category', 'author']))->paginate(12)->withQueryString()
         ]);
     }
 }

@@ -20,14 +20,25 @@
                     </div>
                 </div>
                 <h1 class="mb-3">{{$post->title}}</h1>
-                <p>by {{$post->author->name}} in {{$post->category->name}}.</p>
-                 @if ($post->image)
-                    <div style="max-height:350px; overflow:hidden; background-size:cover;">
-                        <img src="{{ asset('storage/'. $post->image) }}" alt="{{$post->category->name}}" class="img-fluid">
-                    </div>
-                 @else
-                    <img src="https://source.unsplash.com/1200x400?{{$post->category->name}}" alt="{{$post->category->name}}" class="img-fluid">
-                 @endif
+                @if ($post->is_crawl)
+                    <p>by {{$post->author_crawl}} in {{$post->category->name ?? null}}.</p>
+                    @if ($post->image)
+                        <div style="max-height:350px; overflow:hidden; background-size:cover;">
+                            <img src="{{ $post->image }}" alt="{{$post->category->name ?? null}}" class="img-fluid">
+                        </div>
+                    @else
+                        <img src="{{asset('img/no_image_available.png')}}" alt="{{$post->category->name ?? null}}" class="img-fluid">
+                    @endif
+                @else
+                    <p>by {{$post->author->name ?? null}} in {{$post->category->name ?? null}}.</p>
+                    @if ($post->image)
+                        <div style="max-height:350px; overflow:hidden; background-size:cover;">
+                            <img src="{{ asset('storage/'. $post->image) }}" alt="{{$post->category->name ?? null}}" class="img-fluid">
+                        </div>
+                    @else
+                        <img src="{{asset('img/no_image_available.png')}}" alt="{{$post->category->name ?? null}}" class="img-fluid">
+                    @endif
+                @endif
                 
                 <article class="my-3 fs-5">
                     {!!$post->body!!}

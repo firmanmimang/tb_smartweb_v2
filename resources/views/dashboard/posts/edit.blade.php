@@ -107,6 +107,16 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="image_description" class="form-label">Image Description</label>
+            <input type="text" class="form-control @error('image_description') is-invalid @enderror" id="image_description" name="image_description"
+                placeholder="Image Description..." value="{{ old('image_description', $post->image_description) }}">
+            @error('image_description')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="body" class="form-label">Body</label>
             <input id="body" type="hidden" name="body" value="{{old('body', $post->body)}}">
             <trix-editor input="body"></trix-editor>

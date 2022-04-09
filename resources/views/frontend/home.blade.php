@@ -13,144 +13,189 @@
                     <div class="carousel-item {{ $index == 0 ? 'active' : null }}" data-bs-interval="4000">
                         <a href="{{ route('news.detail', $highlight) }}">
                             <div class="overlay-image"
-                                @if ($highlight->image) style="background-image:url({{ asset('storage/' . $highlight->image) }});">
+                                @if ($highlight->is_crawl) @if ($highlight->image) style="background-image:url({{ $highlight->image }});">
                                 @else
-                                    style="background-image:url({{ asset('img/no_image_available.png') }});"> @endif
+                                        style="background-image:url({{ asset('img/no_image_available.png') }});"> @endif
+                            @else
+                                @if ($highlight->image) style="background-image:url({{ asset('storage/' . $highlight->image) }});">
+                                    @else
+                                        style="background-image:url({{ asset('img/no_image_available.png') }});"> @endif
+                                @endif
+                            </div>
+                            <div class="container" style="color:beige">
+                                <div style="background-color: black; opacity: .7;">
+                                    <h3 class="p-2 pb-0">{{ $highlight->title }}</h3>
+                                    <p class="px-2 py-0">
+                                        <span class="text-decoration-none" style="color:beige;">
+                                        </span>
+                                        @if ($highlight->is_crawl)
+                                            <div class="text-decoration-none d-inline ms-2">
+                                                {{ $highlight->author_crawl }}
+                                            </div>
+                                        @else
+                                            <a class="text-decoration-none ms-2"
+                                                href="/search?author={{ $highlight->author->username ?? null }}">
+                                                {{ $highlight->author->name ?? null}}
+                                            </a>
+                                        @endif
+                                        in
+                                        <a class="text-decoration-none"
+                                            href="/search?category={{ $highlight->category->slug ?? null}}">
+                                            {{ $highlight->category->name ?? null}}
+                                        </a>.
+                                    </p>
+                                    <p class="p-2 pt-0">{{ $highlight->excerpt }}</p>
                                 </div>
-                                <div class="container" style="color:beige">
-                                    <div style="background-color: black; opacity: .7;">
-                                        <h3 class="p-2 pb-0">{{ $highlight->title }}</h3>
-                                        <p class="px-2 py-0"> <span class="text-decoration-none"
-                                                style="color:beige;"></span> <a class="text-decoration-none"
-                                                href="/blog?author={{ $highlight->author->username }}">{{ $highlight->author->name }}</a>
-                                            in <a class="text-decoration-none"
-                                                href="/blog?category={{ $highlight->category->slug }}">{{ $highlight->category->name }}</a>.
-                                        </p>
-                                        <p class="p-2 pt-0">{{ $highlight->excerpt }}</p>
-                                    </div>
-                                </div>
+                            </div>
                         </a>
                     </div>
+                    @empty
+                        <div class="carousel-item active" data-bs-interval="4000">
+                            <div class="overlay-image"
+                                style="background-image:url({{ asset('img/no_image_available.png') }});">
+                            </div>
+                            <div class="container">
+                                <h3>No highlight</h3>
+                                {{-- <p></p> --}}
+                            </div>
+                        </div>
+                    @endforelse
+                </div>
+                <a href="#myCarousel" class="carousel-control-prev" role="button" data-bs-slide="prev">
+                    <span class="sr-only"></span>
+                    <span class="carousel-control-prev-icon" aria-bs-hidden="true"></span>
+                </a>
+                <a href="#myCarousel" class="carousel-control-next" role="button" data-bs-slide="next">
+                    <span class="sr-only"></span>
+                    <span class="carousel-control-next-icon" aria-bs-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="container-fluid my-5">
+            <h1 class="mx-5 my-3">Latest News</h1>
+            <div class="row align-items-stretch">
+                @forelse ($news as $p)
+                    <div class="col-md-4 mb-3">
+                        <div class="card" style="height: 100%">
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)">
+                                <a href="{{ route('search', ['category' => $p->category->slug]) }}"
+                                    class="text-light text-decoration-none">
+                                    {{ $p->category->name }}
+                                </a>
+                            </div>
+                            @if ($highlight->is_crawl)
+                                @if ($p->image)
+                                    <div class="w-100 overflow-hidden" style="height: 150px;">
+                                        <img src="{{ $p->image }}" alt="{{ $p->image_description ?? '' }}"
+                                            class="w-100" style="object-fit: cover; height: 100%;">
+                                    </div>
+                                @else
+                                    <div class="w-100 overflow-hidden" style="height: 150px;">
+                                        <img src="{{ asset('img/no_image_available.png') }}" class="w-100"
+                                            alt="no image" style="object-fit: cover; height: 100%;">
+                                    </div>
+                                @endif
+                            @else
+                                @if ($p->image)
+                                    <div class="w-100 overflow-hidden" style="height: 150px;">
+                                        <img src="{{ asset('storage/' . $p->image) }}" alt="{{ $p->category->name }}"
+                                            class="w-100" style="object-fit: cover; height: 100%;">
+                                    </div>
+                                @else
+                                    <div class="w-100 overflow-hidden" style="height: 150px;">
+                                        <img src="{{ asset('img/no_image_available.png') }}" class="w-100"
+                                            alt="no image" style="object-fit: cover; height: 100%;">
+                                    </div>
+                                @endif
+                            @endif
+                            <div class="card-body text-dark">
+                                <h5 class="card-title">{{ $p->title }}</h5>
+                                <p>
+                                    @if ($highlight->is_crawl)
+                                        <small class="text-muted">by <a class="text-decoration-none text-muted me-2">
+                                                {{ $p->author_crawl }}</a>
+                                            {{ $p->published_at->format('d M Y') }}
+                                        </small>
+                                    @else
+                                        <small class="text-muted">by <a class="text-decoration-none"
+                                                href="{{ route('search', ['author' => $p->author->username ?? null ]) }}">{{ $p->author->name ?? null }}</a>
+                                            {{ $p->published_at->format('d M Y') }}
+                                        </small>
+                                    @endif
+                                </p>
+                                <p class="card-text">{{ $p->excerpt }}</p>
+                                <a href="{{ route('news.detail', $p) }}" class="btn btn-primary">read more...</a>
+                            </div>
+                        </div>
+                    </div>
                 @empty
-                    <div class="carousel-item active" data-bs-interval="4000">
-                        <div class="overlay-image"
-                            style="background-image:url({{ asset('img/no_image_available.png') }});">
-                        </div>
-                        <div class="container">
-                            <h3>No highlight</h3>
-                            {{-- <p></p> --}}
-                        </div>
+                    <div class="text-danger text-center">
+                        <h2>No News</h2>
                     </div>
                 @endforelse
             </div>
-            <a href="#myCarousel" class="carousel-control-prev" role="button" data-bs-slide="prev">
-                <span class="sr-only"></span>
-                <span class="carousel-control-prev-icon" aria-bs-hidden="true"></span>
-            </a>
-            <a href="#myCarousel" class="carousel-control-next" role="button" data-bs-slide="next">
-                <span class="sr-only"></span>
-                <span class="carousel-control-next-icon" aria-bs-hidden="true"></span>
-            </a>
-        </div>
-    </div>
+            <div class="d-flex justify-content-end mb-5">
+                {{ $news->links() }}
+            </div>
 
-    <div class="container-fluid my-5">
-        <h1 class="mx-5 my-3">Latest News</h1>
-        <div class="row align-items-stretch">
-            @forelse ($news as $p)
-                <div class="col-md-4 mb-3">
-                    <div class="card" style="height: 100%">
-                        <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)">
-                            <a href="{{route('search', ['category' => $p->category->slug])}}" class="text-light text-decoration-none">
-                                {{ $p->category->name }}
-                            </a>
-                        </div>
-                        @if ($p->image)
-                            <div class="w-100 overflow-hidden" style="height: 150px;">
-                                <img src="{{ asset('storage/' . $p->image) }}" alt="{{ $p->category->name }}" class="w-100" style="object-fit: cover; height: 100%;">
-                            </div>
-                        @else
-                            <div class="w-100 overflow-hidden" style="height: 150px;">
-                                <img src="{{ asset('img/no_image_available.png') }}" class="w-100" alt="no image" style="object-fit: cover; height: 100%;">
-                            </div>
-                        @endif
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">{{ $p->title }}</h5>
-                            <p>
-                                <small class="text-muted">by <a class="text-decoration-none" href="{{route('search', ['author' => $p->author->username ])}}">{{ $p->author->name }}</a>
-                                    {{ $p->created_at->diffForHumans() }}
-                                </small>
-                            </p>
-                            <p class="card-text">{{ $p->excerpt }}</p>
-                            <a href="{{ route('news.detail', $p) }}" class="btn btn-primary">read more...</a>
-                        </div>
+            {{-- team --}}
+            <div class="row my-4">
+                <div class="col-md-3 pe-0">
+                    <img src="{{ asset('img/team/firman.jpeg') }}" alt="" class="w-100" alt=""
+                        style="height: 100%; object-fit: cover">
+                </div>
+                <div class="col-md-3 d-flex flex-column justify-content-center align-items-center"
+                    style="background-color: #14A2DF;">
+                    <div class="p-3">
+                        <h5 class="card-title">Firman Hidayat</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted"></small></p>
                     </div>
                 </div>
-            @empty
-                <div class="text-danger text-center">
-                    <h2>No News</h2>
+                <div class="col-md-3 p-0">
+                    <img src="{{ asset('img/team/pandya.jpg') }}" alt="" class="w-100" alt=""
+                        style="height: 100%; object-fit: cover">>
                 </div>
-            @endforelse
-        </div>
-        <div class="d-flex justify-content-end mb-5">
-            {{$news->links()}}
+                <div class="col-md-3 ps-0 d-flex flex-column justify-content-center align-items-center">
+                    <div class="p-3" style="color: black">
+                        <h5 class="card-title">Pandya Yassar Dewananto</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted"></small></p>
+                    </div>
+                </div>
+                {{-- row 2 team --}}
+                <div class="col-md-3 pe-0 d-flex flex-column justify-content-center align-items-center">
+                    <div class="p-3" style="color: black">
+                        <h5 class="card-title">Mochammad Rolland Akbar</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted"></small></p>
+                    </div>
+                </div>
+                <div class="col-md-3 p-0">
+                    <img src="{{ asset('img/team/rolland.jpg') }}" width="250" height="200" alt="" class="w-100 w-100"
+                        alt="" style="height: 100%; object-fit: cover">>
+                </div>
+                <div class="col-md-3 p-0 d-flex flex-column justify-content-center align-items-center">
+                    <div class="p-3" style="color: black">
+                        <h5 class="card-title">Luthfi Januar Aulia</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted"></small></p>
+                    </div>
+                </div>
+                <div class="col-md-3 ps-0">
+                    <img src="{{ asset('img/team/luthfi.jpg') }}" width="250" height="200" alt="" class="w-100"
+                        alt="" style="height: 100%; object-fit: cover">>
+                </div>
+            </div>
+            <h6 class="display-4 text-end" style="color: #14A2DF;">Meet Our Team</h6>
         </div>
 
-        {{-- team --}}
-        <div class="row my-4">
-            <div class="col-md-3 pe-0">
-                <img src="{{asset('img/team/firman.jpeg')}}" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">
-            </div>
-            <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="background-color: #14A2DF;">
-                <div class="p-3">
-                    <h5 class="card-title">Firman Hidayat</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted"></small></p>
-                </div>
-            </div>
-            <div class="col-md-3 p-0">
-                <img src="{{asset('img/team/pandya.jpg')}}"
-                alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">>
-            </div>
-            <div class="col-md-3 ps-0 d-flex flex-column justify-content-center align-items-center">
-                <div class="p-3" style="color: black">
-                    <h5 class="card-title">Pandya Yassar Dewananto</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted"></small></p>
-                </div>
-            </div>
-            {{-- row 2 team --}}
-            <div class="col-md-3 pe-0 d-flex flex-column justify-content-center align-items-center">
-                <div class="p-3" style="color: black">
-                    <h5 class="card-title">Mochammad Rolland Akbar</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted"></small></p>
-                </div>
-            </div>
-            <div class="col-md-3 p-0">
-                <img src="{{asset('img/team/rolland.jpg')}}"
-                width="250" height="200" alt="" class="w-100 w-100" alt="" style="height: 100%; object-fit: cover">>
-            </div>
-            <div class="col-md-3 p-0 d-flex flex-column justify-content-center align-items-center">
-                <div class="p-3" style="color: black">
-                    <h5 class="card-title">Luthfi Januar Aulia</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted"></small></p>
-                </div>
-            </div>
-            <div class="col-md-3 ps-0">
-                <img src="{{asset('img/team/luthfi.jpg')}}"
-                width="250" height="200" alt="" class="w-100" alt="" style="height: 100%; object-fit: cover">>
-            </div>
-        </div>
-        <h6 class="display-4 text-end" style="color: #14A2DF;">Meet Our Team</h6>
-    </div>
-
-    {{-- <!--content card - EDITORIAL'S PICK -->
+        {{-- <!--content card - EDITORIAL'S PICK -->
     <div>
         <div class="container text-center py-5">
             <h6 class="display-4">EDITORIAL'S PICK</h6>
@@ -493,8 +538,8 @@
             </div>
         </div>
     </div> --}}
-    <!-- team -->
-    {{-- <div class="card-group">
+        <!-- team -->
+        {{-- <div class="card-group">
         <div class="card">
             <img src="https://obs.line-scdn.net/0hZU6sHdKPBXoLChEhj4R6LTNcCQs4bB9zKWpNHSsJU0NyJkF-YmpWGXkPC1Z2OEAoK24ZHn5ZC050aUIuMA/w644"
                 width="250" height="200" alt="" class="card-img-top" alt="">
@@ -536,4 +581,4 @@
                 width="250" height="200" alt="" class="card-img-top" alt="">
         </div>
     </div> --}}
-@endsection
+    @endsection

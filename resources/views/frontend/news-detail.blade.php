@@ -9,9 +9,15 @@
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
                     <div class="overlay-image"
-                        @if ($news->image) style="background-image:url({{ asset('storage/' . $news->image) }});">
+                        @if ($news->is_crawl)
+                            @if ($news->image) style="background-image:url({{ $news->image }});">
+                            @else
+                                style="background-image:url({{ asset('img/no_image_available.png') }});"> @endif
                         @else
-                            style="background-image:url({{ asset('img/no_image_available.png') }});"> @endif
+                            @if ($news->image) style="background-image:url({{ asset('storage/' . $news->image) }});">
+                            @else
+                                style="background-image:url({{ asset('img/no_image_available.png') }});"> @endif
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -27,10 +33,19 @@
         </div>
         <article class="container pb-3">
             <h1 class="my-3">{{ $news->title }}</h1>
-            <p>by <a class="text-decoration-none"
-                    href="/search?author={{ $news->author->username }}">{{ $news->author->name }}</a> in <a
+            @if ($news->is_crawl)
+                <p>by <a class="text-decoration-none text-muted"
+                    >{{ $news->author_crawl }}</a> in <a
                     class="text-decoration-none"
-                    href="/search?category={{ $news->category->slug }}">{{ $news->category->name }}</a>.</p>
+                    href="/search?category={{ $news->category->slug ?? null }}">{{ $news->category->name ?? null }}</a>.
+                </p>
+            @else
+                <p>by <a class="text-decoration-none"
+                    href="/search?author={{ $news->author->username ?? null }}">{{ $news->author->name ?? null}}</a> in <a
+                    class="text-decoration-none"
+                    href="/search?category={{ $news->category->slug ?? null }}">{{ $news->category->name ?? null }}</a>.
+                </p>
+            @endif
             <div class="my-4">
                 {!! $news->body !!}
             </div>

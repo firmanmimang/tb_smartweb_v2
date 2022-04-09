@@ -15,11 +15,15 @@ class CreatePostsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('category_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->boolean('is_crawl');
+            $table->string('author_crawl')->nullable();
+            $table->string('source_crawl')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('image')->nullable();
+            $table->text('image')->nullable();
+            $table->text('image_description')->nullable();
             $table->text('excerpt');
             $table->text('body');
             $table->boolean('is_highlight');

@@ -1,28 +1,29 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Middleware\IsAdmin;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
+
+Route::get('scrape/{count?}', function ($count = 20) {
+    $returnData = Artisan::call("scrape --count=$count");
+    $returnData == 1 ? $message = "Success." : $message = "Fail.";
+
+    return $message;
+})->middleware(['auth', IsAdmin::class]);
 
 // list routing backoffice
-require __DIR__.'/web-routes/backoffice.php';
+require __DIR__ . '/web-routes/backoffice.php';
 // list routing auth
-require __DIR__.'/web-routes/auth.php';
+require __DIR__ . '/web-routes/auth.php';
 // list routing frontend
-require __DIR__.'/web-routes/frontend.php';
+require __DIR__ . '/web-routes/frontend.php';
 
-// Route::get('info', function(){
+// Route::get('info', function()
+// {
 //     return view('info');
 // });
 
-// Route::get('log', function(){
+// Route::get('log', function()
+// {
 //     Log::channel('log')->info('This is testing for codecheef.org!');
 // });
-

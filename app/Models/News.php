@@ -22,6 +22,7 @@ class News extends Model
         'publish_status' => 'boolean',
         'comment_status' => 'boolean',
         'is_highlight' => 'boolean',
+        'published_at' => 'datetime',
     ];
 
     /**
@@ -33,7 +34,7 @@ class News extends Model
             return $query->where(function($query) use ($search) {
                  $query->where('title', 'like', '%' . $search . '%')
                             //  ->orWhere('body', 'like', '%' . $search . '%')
-                             ;
+                            ;
             });
         });
  

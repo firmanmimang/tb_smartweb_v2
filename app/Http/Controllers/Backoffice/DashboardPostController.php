@@ -57,6 +57,7 @@ class DashboardPostController extends Controller
             'slug' => 'required|unique:news',
             'category_id' => 'required',
             'image' => 'image|file|max:1024',
+            'image_description' => 'nullable',
             'body' => 'required',
             'publish_status'=> 'required|in:true,false',
             'comment_status'=> 'required|in:true,false',
@@ -71,6 +72,7 @@ class DashboardPostController extends Controller
             $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
             $validatedData['publish_status'] = $validatedData['publish_status'] == 'true' ? true : false;
             $validatedData['comment_status'] = $validatedData['comment_status'] == 'true' ? true : false;
+            $validatedData['is_crawl'] = false;
             $validatedData['is_highlight'] = false;
             
             DB::beginTransaction();
@@ -133,6 +135,7 @@ class DashboardPostController extends Controller
             'title' => 'required|max:255',
             'category_id' => 'required',
             'image' => 'image|mimes:jpeg,jpg,png',
+            'image_description' => 'nullable',
             'body' => 'required',
             'publish_status'=> 'required|in:true,false',
             'comment_status'=> 'required|in:true,false',
