@@ -149,8 +149,7 @@
                     style="background-color: #14A2DF;">
                     <div class="p-3">
                         <h5 class="card-title">Firman Hidayat</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text">programming and developing of trusted news.</p>
                         <p class="card-text"><small class="text-muted"></small></p>
                     </div>
                 </div>
@@ -161,8 +160,7 @@
                 <div class="col-md-3 ps-0 d-flex flex-column justify-content-center align-items-center">
                     <div class="p-3" style="color: black">
                         <h5 class="card-title">Pandya Yassar Dewananto</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text">designing user interface and user experience of trusted news.</p>
                         <p class="card-text"><small class="text-muted"></small></p>
                     </div>
                 </div>
@@ -170,8 +168,7 @@
                 <div class="col-md-3 pe-0 d-flex flex-column justify-content-center align-items-center">
                     <div class="p-3" style="color: black">
                         <h5 class="card-title">Mochammad Rolland Akbar</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text">managing the development of trusted news.</p>
                         <p class="card-text"><small class="text-muted"></small></p>
                     </div>
                 </div>
@@ -182,8 +179,7 @@
                 <div class="col-md-3 p-0 d-flex flex-column justify-content-center align-items-center">
                     <div class="p-3" style="color: black">
                         <h5 class="card-title">Luthfi Januar Aulia</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text">designing system of trusted news.</p>
                         <p class="card-text"><small class="text-muted"></small></p>
                     </div>
                 </div>
