@@ -149,7 +149,7 @@
                     style="background-color: #14A2DF;">
                     <div class="p-3">
                         <h5 class="card-title">Firman Hidayat</h5>
-                        <p class="card-text">programming and developing of trusted news.</p>
+                        <p class="card-text">programming and developing trusted news.</p>
                         <p class="card-text"><small class="text-muted"></small></p>
                     </div>
                 </div>
