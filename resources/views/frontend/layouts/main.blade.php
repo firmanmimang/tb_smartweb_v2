@@ -21,7 +21,7 @@
     {{-- css scrollTop --}}
     <link rel="stylesheet" href="{{asset('css/scroll-top.css')}}">
     {{-- css floating weather info --}}
-    <link rel="stylesheet" href="{{asset('css/weather.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/weather.css')}}"> --}}
 
     <title>{{env('APP_NAME')}} | {{ $title ?? '' }}</title>
 </head>
@@ -61,7 +61,7 @@
     <script src="{{asset('js/scrollTop.js')}}"></script>
 
     {{-- weather button floating --}}
-    <script src="{{asset('js/btnWeather.js')}}"></script>
+    {{-- <script src="{{asset('js/btnWeather.js')}}"></script> --}}
 </body>
 
 </html>
