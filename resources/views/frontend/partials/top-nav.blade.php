@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="left">
             <a class="navbar-brand d-flex justify-content-center align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('img/logo_T.png') }}" width="200" height="50" alt="logo trusted news">
+                <img src="{{ asset('img/Logo_T.png') }}" width="200" height="50" alt="logo trusted news">
             </a>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
