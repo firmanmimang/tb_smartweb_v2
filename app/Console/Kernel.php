@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('scrape --count=5')->everyTwoMinutes()->runInBackground();
+        $schedule->command('delete:news')->dailyAt('00:00')->runInBackground();
     }
 
     /**
