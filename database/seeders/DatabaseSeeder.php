@@ -51,27 +51,27 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(3)->create();
 
-        Category::create([
-            'name' => 'Programming',
-            'slug' => 'programming'
-        ]);
-        Category::create([
-            'name' => 'Web Design',
-            'slug' => 'web-design'
-        ]);
-        Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
-        ]);
-        Category::create([
-            'name' => 'Otomitif',
-            'slug' => 'otomitif'
-        ]);
-        Category::create([
-            'name' => 'Kampus',
-            'slug' => 'kampus'
-        ]);
+        // Category::create([
+        //     'name' => 'Programming',
+        //     'slug' => 'programming'
+        // ]);
+        // Category::create([
+        //     'name' => 'Web Design',
+        //     'slug' => 'web-design'
+        // ]);
+        // Category::create([
+        //     'name' => 'Personal',
+        //     'slug' => 'personal'
+        // ]);
+        // Category::create([
+        //     'name' => 'Otomitif',
+        //     'slug' => 'otomitif'
+        // ]);
+        // Category::create([
+        //     'name' => 'Kampus',
+        //     'slug' => 'kampus'
+        // ]);
 
-        News::factory(20)->create();
+        // News::factory(20)->create();
     }
 }
