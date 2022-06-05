@@ -49,7 +49,7 @@ class ScrapeCommand extends Command
         $url_sitemap_array = [
             'https://finance.detik.com/energi/sitemap_news.xml',
             'https://www.viva.co.id/sitemap/news/news-sitemap.xml',
-            'https://news.kompas.com/news/sitemap.xml',
+            'https://nasional.kompas.com/news/sitemap.xml',
             // 'https://www.merdeka.com/sitemap.xml',
         ];
 
